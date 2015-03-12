@@ -5,6 +5,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne; 
 
 import models.utils.NivelEstudios;
 
@@ -26,13 +28,18 @@ public class Voto {
 
 	public static final String VALORACION = "VALORACION";
 	private int valoracion;
- 
-	public Voto(Integer id, NivelEstudios nivelEstudios, String ip, int valoracion) {
+
+	@OneToOne
+	@JoinColumn
+	private Tema tema;
+
+	public Voto(NivelEstudios nivelEstudios, String ip, int valoracion,
+			Tema tema) {
 		super();
-		this.id = id;
 		this.nivelEstudios = nivelEstudios;
 		this.ip = ip;
 		this.valoracion = valoracion;
+		this.tema = tema;
 	}
 
 	public Voto() {
@@ -68,6 +75,14 @@ public class Voto {
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
 	}
 
 	@Override
