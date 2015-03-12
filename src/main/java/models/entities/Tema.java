@@ -20,9 +20,8 @@ public class Tema {
 	public Tema() {
 	}
 
-	public Tema(Integer id, String pregunta) {
+	public Tema(String pregunta) {
 		super();
-		this.id = id;
 		this.pregunta = pregunta;
 	}
 
