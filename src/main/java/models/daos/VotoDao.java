@@ -1,5 +1,7 @@
 package models.daos;
 
-public interface  VotoDao {
+import models.entities.Voto;
+
+public interface VotoDao extends GenericDao<Voto, Integer>{
 
 }
