@@ -4,11 +4,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.logging.log4j.LogManager;
+
 import java.util.HashMap;
 import java.util.Map;
  
+
+
 import org.eclipse.persistence.config.PersistenceUnitProperties;
+
 import models.daos.DaoFactory;
+import models.daos.TemaDao;
+import models.daos.VotoDao;
 
 public class DaoJpaFactory extends DaoFactory {
     private static final String PERSISTENCE_UNIT = "JEE_ECP";
@@ -32,4 +38,13 @@ public class DaoJpaFactory extends DaoFactory {
 		LogManager.getLogger("Reseto de tablas");
 	}
 
+    @Override
+	public TemaDao getTemaDao() {
+		return new TemaDaoJpa();
+	}
+
+	@Override
+	public VotoDao getVotoDao() {
+		return new VotoDaoJpa();
+	}
 }
