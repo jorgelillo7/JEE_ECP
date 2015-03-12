@@ -26,7 +26,7 @@ public class Voto {
 
 	public static final String VALORACION = "VALORACION";
 	private int valoracion;
-
+ 
 	public Voto(Integer id, NivelEstudios nivelEstudios, String ip, int valoracion) {
 		super();
 		this.id = id;
