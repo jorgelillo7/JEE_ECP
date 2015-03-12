@@ -19,7 +19,7 @@ import org.junit.Test;
 
 public class VotoDaoJpaTest {
 	public VotoDao votoDaoJpa;
- 
+  
 	private Voto voto;
 	private Tema tema;
 	
