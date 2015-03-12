@@ -30,7 +30,42 @@ public class TemaDaoJpaTest {
 		tema = new Tema("Tema 1");
 		temaDaoJpa.create(tema);
 		assertEquals("Objeto creado correctamente", temaDaoJpa.findAll().size(), 1);
-		
-		// Revisar añadir fk a voto
+		temaDaoJpa.deleteById(tema.getId());
 	}
+	
+	@Test
+	public void testRead() {
+		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
+		tema = new Tema("Tema 1");
+		temaDaoJpa.create(tema);
+		assertEquals(temaDaoJpa.findAll().get(0).getPregunta(),tema.getPregunta());
+		temaDaoJpa.deleteById(tema.getId());
+	}
+	
+	@Test
+	public void testUpdate() {
+		
+	}
+
+	@Test
+	public void testDeleteById() {
+		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
+		tema = new Tema("Tema 1");
+		temaDaoJpa.create(tema);
+		temaDaoJpa.deleteById(temaDaoJpa.findAll().get(0).getId());
+		assertEquals(temaDaoJpa.findAll().size(), 0);		
+	}
+
+	@Test
+	public void testFindAll() {
+		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
+		tema = new Tema("Tema 1");
+		temaDaoJpa.create(tema);
+		assertEquals(temaDaoJpa.findAll().size(), 1);	
+		temaDaoJpa.deleteById(tema.getId());
+	}
+	
+	
+	
+	
 }
