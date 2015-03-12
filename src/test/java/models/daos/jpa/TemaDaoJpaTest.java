@@ -1,4 +1,5 @@
 package models.daos.jpa;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import models.entities.Tema;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test; 
+import org.junit.Test;
 
-public class TemaDaoJpaTest { 
+public class TemaDaoJpaTest {
 	public TemaDao temaDaoJpa;
 
 	private Tema tema;
@@ -23,49 +24,48 @@ public class TemaDaoJpaTest {
 		DaoFactory.setFactory(new DaoJpaFactory());
 		DaoJpaFactory.dropAndCreateTables();
 	}
-	
+
+	@Before
+	public void before() {
+		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
+		tema = new Tema("Tema 1");
+		temaDaoJpa.create(tema);
+	}
+
+	@After
+	public void after() {
+		temaDaoJpa.deleteById(tema.getId());
+	}
+
 	@Test
 	public void testCreate() {
-		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema("Tema 1");
-		temaDaoJpa.create(tema);
-		assertEquals("Objeto creado correctamente", temaDaoJpa.findAll().size(), 1);
-		temaDaoJpa.deleteById(tema.getId());
+		assertEquals("Objeto creado correctamente",
+				temaDaoJpa.findAll().size(), 1);
 	}
-	
+
 	@Test
 	public void testRead() {
-		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema("Tema 1");
-		temaDaoJpa.create(tema);
-		assertEquals(temaDaoJpa.findAll().get(0).getPregunta(),tema.getPregunta());
-		temaDaoJpa.deleteById(tema.getId());
+		assertEquals(temaDaoJpa.findAll().get(0).getPregunta(),
+				tema.getPregunta());
 	}
-	
+
 	@Test
 	public void testUpdate() {
-		
+		String temaOriginal = tema.getPregunta();
+		tema.setPregunta("Tema 2");
+		temaDaoJpa.update(tema);
+		assertNotEquals(temaDaoJpa.findAll().get(0).getPregunta(), temaOriginal);
 	}
 
 	@Test
 	public void testDeleteById() {
-		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema("Tema 1");
-		temaDaoJpa.create(tema);
 		temaDaoJpa.deleteById(temaDaoJpa.findAll().get(0).getId());
-		assertEquals(temaDaoJpa.findAll().size(), 0);		
+		assertEquals(temaDaoJpa.findAll().size(), 0);
 	}
 
 	@Test
 	public void testFindAll() {
-		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema("Tema 1");
-		temaDaoJpa.create(tema);
-		assertEquals(temaDaoJpa.findAll().size(), 1);	
-		temaDaoJpa.deleteById(tema.getId());
+		assertEquals(temaDaoJpa.findAll().size(), 1);
 	}
-	
-	
-	
-	
+
 }
