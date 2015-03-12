@@ -1,5 +1,6 @@
 package models.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -29,7 +30,7 @@ public class Voto {
 	public static final String VALORACION = "VALORACION";
 	private int valoracion;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private Tema tema;
 
