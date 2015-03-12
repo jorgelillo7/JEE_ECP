@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test; 
 
-public class TemaDaoJpaTest {
+public class TemaDaoJpaTest { 
 	public TemaDao temaDaoJpa;
 
 	private Tema tema;
