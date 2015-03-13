@@ -8,6 +8,8 @@ import java.sql.Statement;
 import models.daos.DaoFactory;
 import models.daos.TemaDao;
 import models.daos.VotoDao;
+import models.entities.Tema;
+import models.entities.Voto;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -15,7 +17,7 @@ import org.apache.logging.log4j.LogManager;
 public class DaoJdbcFactory extends DaoFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
-    private static final String URL = "jdbc:mysql://localhost:3306/jee";
+    private static final String URL = "jdbc:mysql://localhost:3306/miwjee";
 
     private static final String USER = "root";
 
@@ -44,23 +46,24 @@ public class DaoJdbcFactory extends DaoFactory {
     public static void dropAndCreateTables() {
         try {
             Statement statement = getConnection().createStatement();
+            statement.executeUpdate(String.format(DROP_TABLE, Tema.TABLE));
+			statement.executeUpdate(String.format(DROP_TABLE, Voto.TABLE));
+			statement.executeUpdate(TemaDaoJdbc.sqlToCreateTable());
+			statement.executeUpdate(VotoDaoJdbc.sqlToCreateTable());
         } catch (SQLException e) {
             LogManager.getLogger(DaoJdbcFactory.class).error("Drop tables: " + e.getMessage());
         }
     }
 
-   
 
 	@Override
 	public TemaDao getTemaDao() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TemaDaoJdbc();
 	}
 
 	@Override
 	public VotoDao getVotoDao() {
-		// TODO Auto-generated method stub
-		return null;
+		return new VotoDaoJdbc();
 	}
 
 }
