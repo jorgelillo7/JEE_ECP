@@ -18,7 +18,7 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	 private Tema create(ResultSet resultSet) {
 	        try {
 	            if (resultSet != null && resultSet.next()) {
-	                return new Tema(resultSet.getInt(Tema.ID),
+	            	return new Tema(resultSet.getInt(Tema.ID), 
 	                        resultSet.getString(Tema.PREGUNTA));
 	            }
 	        } catch (SQLException e) {
@@ -28,19 +28,20 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	    }
 
 
-	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255))";
+	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT, %s VARCHAR(255), PRIMARY KEY (%s))";
 
 	public static String sqlToCreateTable() {
 		return String.format(SQL_CREATE_TABLE, Tema.TABLE, Tema.ID,
-				Tema.PREGUNTA);
+				Tema.PREGUNTA, Tema.ID);
 	}
 
-	private static final String SQL_INSERT = "INSERT INTO %s (%s,%s) VALUES (%d,'%s')";
+
+    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s) VALUES (%d,'%s')";
 
 	@Override
 	public void create(Tema tema) {
-		this.updateSql(String.format(SQL_INSERT, Tema.TABLE, Tema.ID,
-				Tema.PREGUNTA, tema.getId(), tema.getPregunta()));
+		this.updateSql(String.format(SQL_INSERT, Tema.TABLE,
+				Tema.ID, Tema.PREGUNTA, tema.getId(), tema.getPregunta()));
 	}
 
 	@Override
