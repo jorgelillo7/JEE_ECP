@@ -7,7 +7,7 @@ import models.entities.Voto;
 
 public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 		VotoDao {
-
+ 
 	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255), "
 			+ "%s VARCHAR(255), PRIMARY KEY (%s))";
 
