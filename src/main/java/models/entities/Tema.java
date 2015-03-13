@@ -16,12 +16,18 @@ public class Tema {
 	public static final String PREGUNTA = "PREGUNTA";
 	private String pregunta;
 
-	public Tema() {
+	public Tema(Integer id, String pregunta) {
+		super();
+		this.id = id;
+		this.pregunta = pregunta;
 	}
 
 	public Tema(String pregunta) {
 		super();
 		this.pregunta = pregunta;
+	}
+
+	public Tema() {
 	}
 
 	public Integer getId() {
