@@ -39,7 +39,7 @@ public class VotoDaoJpaTest {
 
 	@After
 	public void after() {
-		//temaDaoJpa.deleteById(tema.getId());
+		votoDaoJpa.deleteById(voto.getId());
 	}
 
 	@Test
@@ -47,25 +47,32 @@ public class VotoDaoJpaTest {
 		assertEquals("Objeto creado correctamente",	votoDaoJpa.findAll().size(), 1);
 	}
 	
-	/*
+	
 	@Test
 	public void testRead() {
+		assertEquals(voto.getId(), votoDaoJpa.read(voto.getId()).getId());
 		
 	}
 
 	@Test
 	public void testUpdate() {
+		String ipOriginal = voto.getIp();
+		voto.setIp("172.192.1.2");
+		votoDaoJpa.update(voto);
+		assertNotEquals(ipOriginal, voto.getIp());
 		
 	}
 
 	@Test
 	public void testDeleteById() {
+		votoDaoJpa.deleteById(voto.getId());
+		assertNull(votoDaoJpa.read(voto.getId()));
 		
 	}
 
 	@Test
 	public void testFindAll() {
-		
+		assertEquals(1, votoDaoJpa.findAll().size());
 	}
-	*/
+	
 }
