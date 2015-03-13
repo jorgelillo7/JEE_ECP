@@ -6,7 +6,8 @@ import models.daos.TemaDao;
 import models.entities.Tema;
 import models.entities.Voto;
 
-public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements TemaDao{
+public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
+		TemaDao {
 
 	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s VARCHAR(255), "
 			+ "%s VARCHAR(255), PRIMARY KEY (%s))";
@@ -16,11 +17,10 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements TemaDa
 				Tema.PREGUNTA);
 	}
 
-	
 	@Override
 	public void create(Tema entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements TemaDa
 	@Override
 	public void update(Tema entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public class Tema {
 	public static final String TABLE = "tema";
-
 	public static final String ID = "ID";
 
 	@Id
