@@ -12,7 +12,7 @@ import models.entities.Tema;
 import models.entities.Voto;
 
 import org.apache.logging.log4j.LogManager;
-
+ 
 public class DaoJdbcFactory extends DaoFactory {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/miwjee";
