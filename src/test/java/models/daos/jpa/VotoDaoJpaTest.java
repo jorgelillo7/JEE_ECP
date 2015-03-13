@@ -35,7 +35,7 @@ public class VotoDaoJpaTest {
 		tema = new Tema("Tema 1");
 		voto = new Voto(NivelEstudios.Máster, "192.167.1.4", 5, tema);
 		votoDaoJpa.create(voto);
-	}
+	} 
 
 	@After
 	public void after() {
