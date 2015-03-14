@@ -33,7 +33,7 @@ public class VotoDaoJpaTest {
 	public void before() {
 		votoDaoJpa = DaoFactory.getFactory().getVotoDao();
 		tema = new Tema("Tema 1");
-		voto = new Voto(NivelEstudios.Máster, "192.167.1.4", 5, tema);
+		voto = new Voto(NivelEstudios.Master, "192.167.1.4", 5, tema);
 		votoDaoJpa.create(voto);
 	} 
 
