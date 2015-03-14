@@ -1,5 +1,7 @@
 package views.beans;
 
+import javax.faces.bean.ManagedBean;
+
 import models.entities.Tema;
 
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import controllers.ControllerFactory;
 import controllers.ejbs.NuevoTemaControllerEjb;
 
+@ManagedBean
 public class NuevoTemaView {
 	private ControllerFactory controllerFactory;
 	
