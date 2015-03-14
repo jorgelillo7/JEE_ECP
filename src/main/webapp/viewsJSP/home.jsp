@@ -9,7 +9,7 @@
 <body>
     <h1>Home JEE_ECP JSP</h1>
     <p>
-    <a href="viewsJSP/nuevoTema.jsp">Nuevo Tema</a>
+    <a href="/JEE_ECP/jsp/nuevoTema">Nuevo Tema</a>
     </p>
 </body>
 </html>

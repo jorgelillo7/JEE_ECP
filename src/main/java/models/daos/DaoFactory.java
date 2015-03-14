@@ -1,5 +1,7 @@
 package models.daos;
 
+import models.daos.jpa.DaoJpaFactory;
+
 public abstract class DaoFactory { 
 	public static DaoFactory factory = null;
 
@@ -8,7 +10,9 @@ public abstract class DaoFactory {
 	}
 
 	public static DaoFactory getFactory() {
-		assert factory != null;
+		if(factory == null){ // Para salir del paso, revisar #Revisar
+			DaoFactory.setFactory(new DaoJpaFactory());
+		}
 		return factory;
 	}
 

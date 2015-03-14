@@ -9,7 +9,7 @@ public class NuevoTemaControllerEjb implements NuevoTemaController{
 	@Override
 	public boolean saveTema(Tema tema) {
 	       boolean result = false;
-	        if (tema == null) {
+	        if (tema != null) {
 	            DaoFactory.getFactory().getTemaDao().create(tema);
 	            result = true;
 	        }
