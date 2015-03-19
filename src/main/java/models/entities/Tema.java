@@ -15,7 +15,7 @@ public class Tema {
 	private Integer id;
 
 	public static final String PREGUNTA = "PREGUNTA";
-	private String pregunta;
+	private String pregunta; 
 
 	public Tema(Integer id, String pregunta) {
 		super();
