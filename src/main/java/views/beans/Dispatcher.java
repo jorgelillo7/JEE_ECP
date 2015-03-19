@@ -22,8 +22,8 @@ public class Dispatcher extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String action = request.getPathInfo().substring(1);
-
 		String view;
+		request.setCharacterEncoding("UTF-8"); 
 		switch (action) {
 		case "nuevoTema":
 			NuevoTemaView nuevoTemaView = new NuevoTemaView();
@@ -52,10 +52,12 @@ public class Dispatcher extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo().substring(1);
 		String view = "home";
+		request.setCharacterEncoding("UTF-8"); 
 		switch (action) {
 		case "nuevoTema":
 			Tema tema = new Tema();
 			tema.setPregunta(request.getParameter("pregunta"));
+			tema.setCategoria(request.getParameter("categoria"));
 			NuevoTemaView nuevoTemaView = new NuevoTemaView();
 			nuevoTemaView.setControllerFactory(new ControllerEjbFactory());
 			nuevoTemaView.setTema(tema);

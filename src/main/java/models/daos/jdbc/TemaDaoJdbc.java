@@ -19,6 +19,7 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	        try {
 	            if (resultSet != null && resultSet.next()) {
 	            	return new Tema(resultSet.getInt(Tema.ID), 
+	            			resultSet.getString(Tema.CATEGORIA),
 	                        resultSet.getString(Tema.PREGUNTA));
 	            }
 	        } catch (SQLException e) {
@@ -28,20 +29,20 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	    }
 
 
-	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT, %s VARCHAR(255), PRIMARY KEY (%s))";
+	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT, %s VARCHAR(255), %s VARCHAR(255), PRIMARY KEY (%s))";
 
 	public static String sqlToCreateTable() {
-		return String.format(SQL_CREATE_TABLE, Tema.TABLE, Tema.ID,
+		return String.format(SQL_CREATE_TABLE, Tema.TABLE, Tema.ID, Tema.CATEGORIA,
 				Tema.PREGUNTA, Tema.ID);
 	}
 
 
-    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s) VALUES (%d,'%s')";
+    private static final String SQL_INSERT = "INSERT INTO %s (%s,%s,%s) VALUES (%d,'%s','%s')";
 
 	@Override
 	public void create(Tema tema) {
 		this.updateSql(String.format(SQL_INSERT, Tema.TABLE,
-				Tema.ID, Tema.PREGUNTA, tema.getId(), tema.getPregunta()));
+				Tema.ID,  Tema.CATEGORIA, Tema.PREGUNTA, tema.getId(), tema.getCategoria(), tema.getPregunta()));
 	}
 
 	@Override
@@ -52,10 +53,10 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	}
 	
 
-    private static final String SQL_UPDATE = "UPDATE %s SET %s='%s' WHERE ID=%d";
+    private static final String SQL_UPDATE = "UPDATE %s SET %s='%s', %s='%s' WHERE ID=%d";
 	@Override
 	public void update(Tema tema) {
-		 this.updateSql(String.format(SQL_UPDATE, Tema.TABLE, Tema.PREGUNTA, tema.getPregunta(),
+		 this.updateSql(String.format(SQL_UPDATE, Tema.TABLE, Tema.CATEGORIA, tema.getCategoria(), Tema.PREGUNTA, tema.getPregunta(),
 				 tema.getId()));
 
 	}

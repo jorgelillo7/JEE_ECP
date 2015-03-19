@@ -2,11 +2,7 @@ package models.daos.jpa;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import models.daos.DaoFactory;
-import models.daos.TemaDao;
 import models.daos.VotoDao;
 import models.entities.Tema;
 import models.entities.Voto;
@@ -32,7 +28,7 @@ public class VotoDaoJpaTest {
 	@Before
 	public void before() {
 		votoDaoJpa = DaoFactory.getFactory().getVotoDao();
-		tema = new Tema("Tema 1");
+		tema = new Tema("Deportes","Tema 1");
 		voto = new Voto(NivelEstudios.Master, "192.167.1.4", 5, tema);
 		votoDaoJpa.create(voto);
 	} 

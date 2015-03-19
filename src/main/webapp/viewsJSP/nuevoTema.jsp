@@ -14,6 +14,10 @@
 	<span style="color: red">${errorMsg}</span>
 	<form action="/JEE_ECP/jsp/nuevoTema" method="post">
 		<p>
+			Categoría: <input name="categoria" type="text"
+				value="${nuevoTemaView.tema.categoria}" required />
+		</p>
+		<p>
 			Pregunta: <input name="pregunta" type="text"
 				value="${nuevoTemaView.tema.pregunta}" required />
 		</p>

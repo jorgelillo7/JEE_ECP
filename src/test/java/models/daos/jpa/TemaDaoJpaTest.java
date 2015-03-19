@@ -2,9 +2,6 @@ package models.daos.jpa;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import models.daos.DaoFactory;
 import models.daos.TemaDao;
 import models.entities.Tema;
@@ -28,7 +25,7 @@ public class TemaDaoJpaTest {
 	@Before
 	public void before() {
 		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema("Tema 1");
+		tema = new Tema("Ciencia","Tema 1");
 		temaDaoJpa.create(tema);
 	}
 

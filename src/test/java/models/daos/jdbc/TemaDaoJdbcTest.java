@@ -25,7 +25,7 @@ public class TemaDaoJdbcTest {
 	@Before
 	public void before() {
 		temaDaoJdbc = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema(13, "Tema 1");
+		tema = new Tema(13, "Ciencia", "Tema 1");
 		temaDaoJdbc.create(tema);
 	}
 
