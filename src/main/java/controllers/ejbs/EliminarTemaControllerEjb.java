@@ -19,7 +19,7 @@ public class EliminarTemaControllerEjb implements EliminarTemaController {
 		Tema tema = temaDao.read(id);
 		List<Voto> listaVotosAsociado = temaDao.findVotosByTema(tema);
 		VotoDao votoDao = DaoFactory.getFactory().getVotoDao();
-		
+	 	
 		try {
 			for (Voto voto : listaVotosAsociado) {
 				votoDao.deleteById(voto.getId());
