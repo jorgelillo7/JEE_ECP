@@ -3,6 +3,7 @@ package controllers.ejbs;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import controllers.AñadirVotoController;
 import controllers.ControllerFactory;
 import controllers.EliminarTemaController;
 import controllers.NuevoTemaController;
@@ -33,6 +34,13 @@ public class ControllerEjbFactory extends ControllerFactory {
 			eliminarTemaController = new EliminarTemaControllerEjb();
         }
         return eliminarTemaController; 
+	}
+
+
+	@Override
+	public AñadirVotoController getAñadirVotoController() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
