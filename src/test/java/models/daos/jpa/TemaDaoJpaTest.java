@@ -2,9 +2,14 @@ package models.daos.jpa;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import models.daos.DaoFactory;
 import models.daos.TemaDao;
+import models.daos.VotoDao;
 import models.entities.Tema;
+import models.entities.Voto;
+import models.utils.NivelEstudios;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,8 +18,10 @@ import org.junit.Test;
 
 public class TemaDaoJpaTest {
 	public TemaDao temaDaoJpa;
+	public VotoDao votoDaoJpa;
 
 	private Tema tema;
+	private Voto voto;
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -25,12 +32,20 @@ public class TemaDaoJpaTest {
 	@Before
 	public void before() {
 		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
-		tema = new Tema("Ciencia","Tema 1");
-		temaDaoJpa.create(tema);
+		votoDaoJpa = DaoFactory.getFactory().getVotoDao();
+		tema = new Tema("Ciencia", "Tema 1");
+		voto = new Voto(NivelEstudios.Master, "192.167.1.4", 5, tema);
+		votoDaoJpa.create(voto);
 	}
 
 	@After
 	public void after() {
+		List<Voto> listaVotosAsociado = temaDaoJpa.findVotosByTema(tema);
+
+		for (Voto voto : listaVotosAsociado) {
+			votoDaoJpa.deleteById(voto.getId());
+		}
+
 		temaDaoJpa.deleteById(tema.getId());
 	}
 
@@ -56,13 +71,25 @@ public class TemaDaoJpaTest {
 
 	@Test
 	public void testDeleteById() {
-		temaDaoJpa.deleteById(temaDaoJpa.findAll().get(0).getId());
+		List<Voto> listaVotosAsociado = temaDaoJpa.findVotosByTema(tema);
+
+		for (Voto voto : listaVotosAsociado) {
+			votoDaoJpa.deleteById(voto.getId());
+		}
+		
+		temaDaoJpa.deleteById(tema.getId());
 		assertEquals(temaDaoJpa.findAll().size(), 0);
 	}
 
 	@Test
 	public void testFindAll() {
 		assertEquals(temaDaoJpa.findAll().size(), 1);
+	}
+
+	@Test
+	public void testGetVotosByTema() {
+		List<Voto> lista = (temaDaoJpa.findVotosByTema(tema));
+		assertEquals(lista.size(), 1);
 	}
 
 }

@@ -6,6 +6,7 @@ import models.daos.DaoFactory;
 import models.daos.TemaDao;
 import models.daos.VotoDao;
 import models.entities.Tema;
+import models.entities.Voto;
 import controllers.EliminarTemaController;
 
 public class EliminarTemaControllerEjb implements EliminarTemaController {
@@ -14,9 +15,16 @@ public class EliminarTemaControllerEjb implements EliminarTemaController {
 
 	@Override
 	public boolean deleteTema(Integer id) {
-		//TemaDao temaDao = DaoFactory.getFactory().getTemaDao();
-		//VotoDao votoDao = DaoFactory.getFactory().getVotoDao();
+		TemaDao temaDao = DaoFactory.getFactory().getTemaDao();
+		Tema tema = temaDao.read(id);
+		List<Voto> listaVotosAsociado = temaDao.findVotosByTema(tema);
+		VotoDao votoDao = DaoFactory.getFactory().getVotoDao();
+		
 		try {
+			for (Voto voto : listaVotosAsociado) {
+				votoDao.deleteById(voto.getId());
+			}
+
 			DaoFactory.getFactory().getTemaDao().deleteById(id);
 		} catch (Exception e) {
 			return false;
