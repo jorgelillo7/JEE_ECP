@@ -31,12 +31,14 @@ public class Dispatcher extends HttpServlet {
 			request.setAttribute(action, nuevoTemaView);
 			view = action;
 			break;
-		case "rol":
-			/*
-			 * RolView rolView = new RolView(); request.setAttribute(action,
-			 * rolView); break;
-			 */
+		case "eliminarTema":
+			EliminarTemaView eliminarTemaView = new EliminarTemaView();
+			eliminarTemaView.setControllerFactory(new ControllerEjbFactory());
+			eliminarTemaView.mostrarListaTemas();
+			eliminarTemaView.setPassword("aaaaaaaa");
+			request.setAttribute(action, eliminarTemaView);
 			view = action;
+			break;
 		default:
 			view = "home";
 		}
@@ -64,13 +66,12 @@ public class Dispatcher extends HttpServlet {
 			request.setAttribute(action, nuevoTemaView);
 			view = nuevoTemaView.process();
 			break;
-		case "rol":
-			/*
-			 * RolView rolView = new RolView();
-			 * rolView.setRol(request.getParameter("rol"));
-			 * request.setAttribute(action, rolView); view = rolView.process();
-			 */
+		case "eliminarTema":
+			
 			break;
+			
+		default:
+			view = "home";
 		}
 
 		this.getServletContext()

@@ -1,56 +1,72 @@
 package views.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import models.entities.Tema;
-
-import org.apache.logging.log4j.LogManager;
-
 import controllers.ControllerFactory;
-import controllers.ejbs.NuevoTemaControllerEjb;
 
 @ManagedBean
 public class EliminarTemaView {
 	private ControllerFactory controllerFactory;
-	
+
+	private String password;
+
 	private String errorMsg;
 
-	private Tema tema;
+	public Integer id;
 
-	public EliminarTemaView() {
+	public List<Tema> temas;
+
+	public List<Tema> getTemas() {
+		return temas;
+	}
+
+	public void setTemas(List<Tema> temas) {
+		this.temas = temas;
 	}
 
 	public String getErrorMsg() {
 		return errorMsg;
 	}
 
-	public Tema getTema() {
-		return tema;
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
-	public void setTema(Tema tema) {
-		this.tema = tema;
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setControllerFactory(ControllerFactory controllerFactory) {
 		this.controllerFactory = controllerFactory;
 	}
-	
-	public void update() {
-		/*
-		 * LogManager.getLogger(TemaView.class).debug(
-		 * "Se accede a la capa de negocio para recuperar roles"); this.roles =
-		 * new String[] {"uno", "dos", "tres"};
-		 */
+
+	@PostConstruct
+	public void mostrarListaTemas() {
+		 System.out.println("Se actualizan datos de la capa de negocio");
+		 temas = this.controllerFactory.getEliminarTemaController().mostrarTemas();
+	     System.out.print("Temas: " + temas.size());
 	}
 
-	public String process() {
-		LogManager.getLogger(EliminarTemaView.class).debug(
-				"Se accede a la capa de negocio para registrar tema: " + tema);
-
-		controllerFactory.getNuevoTemaControler().saveTema(tema);
+	public String eliminarTema() {
+		this.controllerFactory.getEliminarTemaController().deleteTema(this.id);
 		return "home";
-
 	}
 
 }
