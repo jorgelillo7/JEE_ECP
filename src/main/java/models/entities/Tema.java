@@ -62,7 +62,7 @@ public class Tema {
 
 	@Override
 	public String toString() {
-		return "Tema [id=" + id + ", categoria=" + categoria + ", pregunta=" + pregunta + "]";
+		return categoria + " - " + pregunta;
 	}
 
 

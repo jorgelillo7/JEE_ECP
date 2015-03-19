@@ -9,20 +9,23 @@
 </head>
 <body>
 
-	<c:set var="eTemaView" scope="request" value="${eliminarTemaView}" />
+	<c:set var="eTemaView" scope="request" value="${temaView}" />
+
+	<form action="/JEE_ECP/jsp/eliminarTemaAutenticado" method="post">
+		<p>
+			Listado de Temas: <select name="temaABorrar">
+				<c:forEach var="tema" items="${eTemaView.temas}">
+					<option value="${tema.getId()}">${tema.toString()}</option>
+				</c:forEach>
+			</select>
+		</p>
+		<p>
+			<input type="submit" value="Borrar" />
+		</p>
+	</form>
+
 	<p>
-	Passwrod: ${eTemaView.password} 
-	</p>
-	<p>
-		Temas:
-		<ul>
-			<c:forEach var="tema" items="${eTemaView.temas}">
-				<li>${tema.getCategoria()}</li>
-			</c:forEach>
-		</ul>
-	</p>
-	<p>
-			<a href="/JEE_ECP/jsp/home">Volver a Home</a>
+		<a href="/JEE_ECP/jsp/home">Volver a Home</a>
 	</p>
 </body>
 </html>

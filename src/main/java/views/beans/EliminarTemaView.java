@@ -17,6 +17,8 @@ public class EliminarTemaView {
 
 	private String errorMsg;
 
+	private String successMsg;
+
 	public Integer id;
 
 	public List<Tema> temas;
@@ -35,6 +37,14 @@ public class EliminarTemaView {
 
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
+	}
+
+	public String getSuccessMsg() {
+		return successMsg;
+	}
+
+	public void setSuccessMsg(String successMsg) {
+		this.successMsg = successMsg;
 	}
 
 	public String getPassword() {
@@ -59,14 +69,29 @@ public class EliminarTemaView {
 
 	@PostConstruct
 	public void mostrarListaTemas() {
-		 System.out.println("Se actualizan datos de la capa de negocio");
-		 temas = this.controllerFactory.getEliminarTemaController().mostrarTemas();
-	     System.out.print("Temas: " + temas.size());
+		temas = this.controllerFactory.getEliminarTemaController()
+				.mostrarTemas();
 	}
 
 	public String eliminarTema() {
-		this.controllerFactory.getEliminarTemaController().deleteTema(this.id);
+		boolean check = this.controllerFactory.getEliminarTemaController()
+				.deleteTema(this.id);
+		System.out.print("AAAA" + check);
+		if (check) {
+			this.setSuccessMsg("Tema " + this.id + " eliminado con éxito");
+		} else {
+			this.setErrorMsg("Ocurrió un error al intentar borrar");
+		}
 		return "home";
+	}
+
+	public boolean checkPassword() {
+		boolean check = this.controllerFactory.getEliminarTemaController()
+				.passwordCorrecto(this.password);
+		if (check == false) {
+			this.setErrorMsg("Password incorrecto");
+		}
+		return check;
 	}
 
 }

@@ -10,7 +10,7 @@
 <body>
 	<h1>Nuevo tema</h1>
 	<c:set var="nuevoTemaView" scope="request" value="${nuevoTemaView}" />
-	<span style="color: red">${errorMsg}</span>
+	
 	<form action="/JEE_ECP/jsp/nuevoTema" method="post">
 		<p>
 			Categoría: <input name="categoria" type="text"

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controllers.ejbs.ControllerEjbFactory;
 import models.entities.Tema;
- 
+
 @WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class Dispatcher extends HttpServlet {
 
 		String action = request.getPathInfo().substring(1);
 		String view;
-		request.setCharacterEncoding("UTF-8"); 
+		request.setCharacterEncoding("UTF-8");
 		switch (action) {
 		case "nuevoTema":
 			NuevoTemaView nuevoTemaView = new NuevoTemaView();
@@ -32,11 +32,11 @@ public class Dispatcher extends HttpServlet {
 			view = action;
 			break;
 		case "eliminarTema":
+			System.out.print("GET ELIMINAR");
 			EliminarTemaView eliminarTemaView = new EliminarTemaView();
 			eliminarTemaView.setControllerFactory(new ControllerEjbFactory());
 			eliminarTemaView.mostrarListaTemas();
-			eliminarTemaView.setPassword("aaaaaaaa");
-			request.setAttribute(action, eliminarTemaView);
+			request.setAttribute("temaView", eliminarTemaView);
 			view = action;
 			break;
 		default:
@@ -54,7 +54,8 @@ public class Dispatcher extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo().substring(1);
 		String view = "home";
-		request.setCharacterEncoding("UTF-8"); 
+		boolean passwordOk = false;
+		request.setCharacterEncoding("UTF-8");
 		switch (action) {
 		case "nuevoTema":
 			Tema tema = new Tema();
@@ -67,16 +68,36 @@ public class Dispatcher extends HttpServlet {
 			view = nuevoTemaView.process();
 			break;
 		case "eliminarTema":
-			
+			String password = String.valueOf(request.getParameter("password"));
+			EliminarTemaView eliminarTemaView = new EliminarTemaView();
+			eliminarTemaView.setPassword(password);
+			eliminarTemaView.setControllerFactory(new ControllerEjbFactory());
+			passwordOk = eliminarTemaView.checkPassword();
+			request.setAttribute("eliminarTemaView", eliminarTemaView);
+			view = "home";
 			break;
-			
+
+		case "eliminarTemaAutenticado":
+			int temaid = Integer.valueOf(request.getParameter("temaABorrar"));
+			EliminarTemaView eliminarTemaViewAutenticated = new EliminarTemaView();
+			eliminarTemaViewAutenticated
+					.setControllerFactory(new ControllerEjbFactory());
+			eliminarTemaViewAutenticated.setId(temaid);
+			eliminarTemaViewAutenticated.eliminarTema();
+			view = "home";
+			break;
 		default:
 			view = "home";
 		}
 
-		this.getServletContext()
-				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
-				.forward(request, response);
+		if (passwordOk) {
+			response.sendRedirect("eliminarTema");
+		} else {
+			this.getServletContext()
+					.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
+					.forward(request, response);
+		}
+
 	}
 
 }
