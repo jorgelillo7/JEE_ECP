@@ -1,8 +1,8 @@
 package models.daos.jpa;
 
 import static org.junit.Assert.*;
-
 import models.daos.DaoFactory;
+import models.daos.TemaDao;
 import models.daos.VotoDao;
 import models.entities.Tema;
 import models.entities.Voto;
@@ -15,6 +15,7 @@ import org.junit.Test;
 
 public class VotoDaoJpaTest {
 	public VotoDao votoDaoJpa;
+	public TemaDao temaDaoJpa;
   
 	private Voto voto;
 	private Tema tema;
@@ -27,9 +28,11 @@ public class VotoDaoJpaTest {
 
 	@Before
 	public void before() {
+		temaDaoJpa = DaoFactory.getFactory().getTemaDao();
 		votoDaoJpa = DaoFactory.getFactory().getVotoDao();
 		tema = new Tema("Deportes","Tema 1");
 		voto = new Voto(NivelEstudios.Master, "192.167.1.4", 5, tema);
+		temaDaoJpa.create(tema);
 		votoDaoJpa.create(voto);
 	} 
 

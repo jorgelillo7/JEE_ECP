@@ -27,6 +27,10 @@
 		</p>
 
 	</form>
+	
+	<p>
+	<a href="/JEE_ECP/jsp/añadirVoto">Añadir Voto</a>
+	</p>
 
 
 </body>

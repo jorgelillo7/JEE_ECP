@@ -35,6 +35,7 @@ public class TemaDaoJpaTest {
 		votoDaoJpa = DaoFactory.getFactory().getVotoDao();
 		tema = new Tema("Ciencia", "Tema 1");
 		voto = new Voto(NivelEstudios.Master, "192.167.1.4", 5, tema);
+		temaDaoJpa.create(tema);
 		votoDaoJpa.create(voto);
 	}
 

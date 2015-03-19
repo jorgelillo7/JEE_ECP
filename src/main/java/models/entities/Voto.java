@@ -8,7 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import models.utils.NivelEstudios;
 
@@ -30,9 +33,12 @@ public class Voto {
 
 	public static final String VALORACION = "VALORACION";
 	private int valoracion;
+	
+	public static final String TEMA = "tema_id";
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn
+	@ManyToOne
+	@JoinColumn(name = TEMA, nullable = false)
+    @CascadeOnDelete
 	private Tema tema;
 
 	public Voto(NivelEstudios nivelEstudios, String ip, int valoracion,

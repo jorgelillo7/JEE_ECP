@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import controllers.ejbs.ControllerEjbFactory;
 import models.entities.Tema;
+import models.entities.Voto;
+import models.utils.NivelEstudios;
 
 @WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
@@ -31,12 +33,20 @@ public class Dispatcher extends HttpServlet {
 			request.setAttribute(action, nuevoTemaView);
 			view = action;
 			break;
-		case "eliminarTema":
-			System.out.print("GET ELIMINAR");
+		case "eliminarTema": 
 			EliminarTemaView eliminarTemaView = new EliminarTemaView();
 			eliminarTemaView.setControllerFactory(new ControllerEjbFactory());
 			eliminarTemaView.mostrarListaTemas();
 			request.setAttribute("temaView", eliminarTemaView);
+			view = action;
+			break;
+		case "añadirVoto": 
+			AñadirVotoView añadirVotoView = new AñadirVotoView();
+			añadirVotoView.setVoto(new Voto());
+			añadirVotoView.setControllerFactory(new ControllerEjbFactory());
+			añadirVotoView.mostrarListaTemas();
+			añadirVotoView.mostrarListaEstudios();
+			request.setAttribute("añadirVotoView", añadirVotoView);
 			view = action;
 			break;
 		default:
@@ -85,6 +95,38 @@ public class Dispatcher extends HttpServlet {
 			eliminarTemaViewAutenticated.setId(temaid);
 			eliminarTemaViewAutenticated.eliminarTema();
 			view = "home";
+			break;
+		case "añadirVoto":
+			System.out.print("entro");
+			int temaSeleccionado = Integer.valueOf(request.getParameter("temaAVotar"));
+			AñadirVotoView añadirVotoView = new AñadirVotoView();
+			añadirVotoView
+					.setControllerFactory(new ControllerEjbFactory());
+			añadirVotoView.setIdTema(temaSeleccionado);
+			System.out.print("tema a votar pasado");
+			Voto voto = new Voto();
+			
+			String nivel = request.getParameter("nivelEstudios");
+			voto.setNivelEstudios(NivelEstudios.valueOf(nivel));
+			
+			System.out.print("val");
+			int valoracion = Integer.valueOf(request.getParameter("valoracion"));
+			voto.setValoracion(valoracion);
+			
+			System.out.print("postVal");
+			
+			String ipAddress  = request.getHeader("X-FORWARDED-FOR");
+			if(ipAddress == null)
+			{
+			  ipAddress = request.getRemoteAddr();
+			}
+			System.out.println("ipAddress:"+ipAddress);
+			
+			voto.setIp(ipAddress);
+			
+			
+			view = añadirVotoView.saveVoto(voto);
+			
 			break;
 		default:
 			view = "home";

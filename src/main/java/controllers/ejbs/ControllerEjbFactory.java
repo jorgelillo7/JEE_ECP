@@ -15,6 +15,7 @@ public class ControllerEjbFactory extends ControllerFactory {
  
     private NuevoTemaController nuevoTemaController;
     private EliminarTemaController eliminarTemaController;
+    private AñadirVotoController añadirVotoController;
 
     public ControllerEjbFactory() { 
     }
@@ -39,8 +40,10 @@ public class ControllerEjbFactory extends ControllerFactory {
 
 	@Override
 	public AñadirVotoController getAñadirVotoController() {
-		// TODO Auto-generated method stub
-		return null;
+		if (añadirVotoController == null) {
+			añadirVotoController = new AñadirVotoControllerEjb();
+        }
+        return añadirVotoController; 
 	}
 
 }
