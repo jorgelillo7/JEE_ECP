@@ -7,4 +7,5 @@ import models.entities.Voto;
 
 public interface TemaDao extends GenericDao<Tema, Integer> {
 	List<Voto> findVotosByTema(Tema tema); 
+	long countVotosByTema(Tema tema); 
 }

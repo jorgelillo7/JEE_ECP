@@ -22,6 +22,7 @@ public class TemaDaoJpaTest {
 
 	private Tema tema;
 	private Voto voto;
+	private Voto voto2;
 
 	@BeforeClass
 	public static void beforeClass() {
@@ -35,6 +36,7 @@ public class TemaDaoJpaTest {
 		votoDaoJpa = DaoFactory.getFactory().getVotoDao();
 		tema = new Tema("Ciencia", "Tema 1");
 		voto = new Voto(NivelEstudios.Master, "192.167.1.4", 5, tema);
+		voto2 = new Voto(NivelEstudios.FP, "127.0.0.1", 8, tema);
 		temaDaoJpa.create(tema);
 		votoDaoJpa.create(voto);
 	}
@@ -92,5 +94,11 @@ public class TemaDaoJpaTest {
 		List<Voto> lista = (temaDaoJpa.findVotosByTema(tema));
 		assertEquals(lista.size(), 1);
 	}
-
+	
+	@Test
+	public void testCountVotosByTema() {
+		long count = (temaDaoJpa.countVotosByTema(tema));
+		assertEquals(count, 1);
+	}
+	
 }
