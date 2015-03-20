@@ -8,5 +8,12 @@
 </h:head>
 <h:body>
 	<h3>Nuevo Tema JSF</h3> 
+	<h:form id="nuevoTema">
+		<p>Categoría:<h:inputText id="categoria"/></p>
+		 
+		<p>Pregunta:<h:inputText id="pregunta"/></p>
+	
+		<h:commandButton value="Guardar" type="submit" action="#{nuevoTemaView.process}" />
+	</h:form>
 </h:body>
 </html>

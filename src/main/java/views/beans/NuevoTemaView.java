@@ -1,6 +1,7 @@
 package views.beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import models.entities.Tema;
 
@@ -11,6 +12,7 @@ import controllers.ejbs.NuevoTemaControllerEjb;
 
 @ManagedBean
 public class NuevoTemaView {
+	@ManagedProperty(value = "#{controllerFactory}")
 	private ControllerFactory controllerFactory;
 	
 	private String errorMsg;
@@ -18,6 +20,7 @@ public class NuevoTemaView {
 	private Tema tema;
 
 	public NuevoTemaView() {
+		tema = new Tema();
 	}
 
 	public String getErrorMsg() {
