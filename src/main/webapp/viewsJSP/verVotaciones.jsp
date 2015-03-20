@@ -16,7 +16,7 @@
 			<th>Pregunta</th>
 			<th>Número de votos</th>
 		</thead>
-		<tbody>
+		<tbody> 
 			<c:forEach var="tema" items="${vVotacionView.temas}">
 				<tr>
 					<td>${tema.toString()}</td>
