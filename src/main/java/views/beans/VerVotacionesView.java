@@ -21,9 +21,12 @@ public class VerVotacionesView {
 
 	private String errorMsg;
 	private String successMsg;
-
+ 
 	public List<Tema> temas;
 	public List<Long> votosPorTema;
+	public List<NivelEstudios> listaNiveles;
+	public List<List<String>> medias;
+
 
 	public List<Long> getVotosPorTema() {
 		return votosPorTema;
@@ -61,12 +64,33 @@ public class VerVotacionesView {
 		this.controllerFactory = controllerFactory;
 	}
 
+	public List<NivelEstudios> getListaNiveles() {
+		return listaNiveles;
+	}
+
+	public void setListaNiveles(List<NivelEstudios> listaNiveles) {
+		this.listaNiveles = listaNiveles;
+	}
+	
+	public List<List<String>> getMedias() {
+		return medias;
+	}
+
+	public void setMedias(List<List<String>> medias) {
+		this.medias = medias;
+	}
+
+	
 	@PostConstruct
 	public void configurarTabla() {
 		temas = this.controllerFactory.getVerVotacionesController()
 				.getListaTemas();
 		
 		votosPorTema = this.controllerFactory.getVerVotacionesController().getNumeroVotos();
+		
+		listaNiveles = this.controllerFactory.getVerVotacionesController().getListaNivelEstudios();
+		
+		medias = this.controllerFactory.getVerVotacionesController().getListaMedia();
 	}
 
 }

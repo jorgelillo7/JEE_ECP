@@ -15,12 +15,20 @@
 		<thead>
 			<th>Pregunta</th>
 			<th>Número de votos</th>
+			<c:forEach var="nivel" items="${vVotacionView.listaNiveles}">
+				<th>${nivel.toString()}</th>
+			</c:forEach>
 		</thead>
 		<tbody> 
 			<c:forEach var="tema" items="${vVotacionView.temas}" varStatus="loop">
   				<tr>
 					<td>${tema.toString()}</td>
 					<td>${vVotacionView.votosPorTema.get(loop.index)}</td>
+					 	
+							<c:forEach var="media" items="${vVotacionView.medias.get(loop.index)}">
+							<td>	${media}	</td>
+							</c:forEach>
+					
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -9,4 +9,6 @@ import models.utils.NivelEstudios;
 public interface VerVotacionesController {
 	List<Tema> getListaTemas();
 	List<Long> getNumeroVotos();
+	List<NivelEstudios> getListaNivelEstudios();
+	List<List<String>> getListaMedia();
 }
