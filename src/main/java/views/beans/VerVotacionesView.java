@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -15,6 +16,7 @@ import controllers.ControllerFactory;
 
 @ManagedBean
 public class VerVotacionesView {
+	@ManagedProperty(value = "#{controllerFactory}")
 	private ControllerFactory controllerFactory;
 
 	private String errorMsg;
@@ -59,6 +61,7 @@ public class VerVotacionesView {
 		this.controllerFactory = controllerFactory;
 	}
 
+	@PostConstruct
 	public void configurarTabla() {
 		temas = this.controllerFactory.getVerVotacionesController()
 				.getListaTemas();
