@@ -8,4 +8,5 @@ import models.utils.NivelEstudios;
  
 public interface VerVotacionesController {
 	List<Tema> getListaTemas();
+	List<Long> getNumeroVotos();
 }

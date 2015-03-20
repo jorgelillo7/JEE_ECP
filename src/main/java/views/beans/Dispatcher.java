@@ -52,7 +52,7 @@ public class Dispatcher extends HttpServlet {
 		case "verVotaciones":
 			VerVotacionesView verVotacionesView = new VerVotacionesView();
 			verVotacionesView.setControllerFactory(new ControllerEjbFactory());
-			verVotacionesView.mostrarListaTemas();
+			verVotacionesView.configurarTabla();
 			request.setAttribute("votacionesView", verVotacionesView);
 			view = action;
 			break;

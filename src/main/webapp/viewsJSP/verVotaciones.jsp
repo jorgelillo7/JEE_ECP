@@ -17,10 +17,10 @@
 			<th>Número de votos</th>
 		</thead>
 		<tbody> 
-			<c:forEach var="tema" items="${vVotacionView.temas}">
-				<tr>
+			<c:forEach var="tema" items="${vVotacionView.temas}" varStatus="loop">
+  				<tr>
 					<td>${tema.toString()}</td>
-					<td>X</td>
+					<td>${vVotacionView.votosPorTema.get(loop.index)}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

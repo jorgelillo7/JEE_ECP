@@ -21,6 +21,15 @@ public class VerVotacionesView {
 	private String successMsg;
 
 	public List<Tema> temas;
+	public List<Long> votosPorTema;
+
+	public List<Long> getVotosPorTema() {
+		return votosPorTema;
+	}
+
+	public void setVotosPorTema(List<Long> votosPorTema) {
+		this.votosPorTema = votosPorTema;
+	}
 
 	public List<Tema> getTemas() {
 		return temas;
@@ -50,9 +59,11 @@ public class VerVotacionesView {
 		this.controllerFactory = controllerFactory;
 	}
 
-	public void mostrarListaTemas() {
+	public void configurarTabla() {
 		temas = this.controllerFactory.getVerVotacionesController()
 				.getListaTemas();
+		
+		votosPorTema = this.controllerFactory.getVerVotacionesController().getNumeroVotos();
 	}
 
 }
