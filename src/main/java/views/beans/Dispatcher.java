@@ -111,7 +111,7 @@ public class Dispatcher extends HttpServlet {
 			int valoracion = Integer
 					.valueOf(request.getParameter("valoracion"));
 			voto.setValoracion(valoracion);
-
+ 
 			String ipAddress = request.getHeader("X-FORWARDED-FOR");
 			if (ipAddress == null) {
 				ipAddress = request.getRemoteAddr();
