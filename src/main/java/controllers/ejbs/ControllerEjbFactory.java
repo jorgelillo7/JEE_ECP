@@ -7,6 +7,7 @@ import controllers.AñadirVotoController;
 import controllers.ControllerFactory;
 import controllers.EliminarTemaController;
 import controllers.NuevoTemaController;
+import controllers.VerVotacionesController;
  
 
 @ManagedBean(name = "controllerFactory")
@@ -16,6 +17,7 @@ public class ControllerEjbFactory extends ControllerFactory {
     private NuevoTemaController nuevoTemaController;
     private EliminarTemaController eliminarTemaController;
     private AñadirVotoController añadirVotoController;
+    private VerVotacionesController verVotacionesController;
 
     public ControllerEjbFactory() { 
     }
@@ -45,5 +47,14 @@ public class ControllerEjbFactory extends ControllerFactory {
         }
         return añadirVotoController; 
 	}
+	
+	@Override
+	public VerVotacionesController getVerVotacionesController() {
+		if (verVotacionesController == null) {
+			verVotacionesController = new VerVotacionesControllerEjb();
+        }
+        return verVotacionesController; 
+	}
+
 
 }

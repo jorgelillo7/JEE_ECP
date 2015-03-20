@@ -87,4 +87,10 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 		return null;
 	}
 
+	@Override
+	public long countVotosByTema(Tema tema) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

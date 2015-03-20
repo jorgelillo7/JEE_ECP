@@ -1,4 +1,4 @@
-package views.beans;
+package pruebas;
 
 import javax.faces.bean.ManagedBean;
 

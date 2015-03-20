@@ -31,6 +31,10 @@
 	<p>
 	<a href="/JEE_ECP/jsp/añadirVoto">Añadir Voto</a>
 	</p>
+	
+		<p>
+		<a href="/JEE_ECP/jsp/verVotaciones">Ver votaciones</a>
+	</p>
 
 
 </body>

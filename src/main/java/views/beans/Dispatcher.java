@@ -49,6 +49,13 @@ public class Dispatcher extends HttpServlet {
 			request.setAttribute("añadirVotoView", añadirVotoView);
 			view = action;
 			break;
+		case "verVotaciones":
+			VerVotacionesView verVotacionesView = new VerVotacionesView();
+			verVotacionesView.setControllerFactory(new ControllerEjbFactory());
+			verVotacionesView.mostrarListaTemas();
+			request.setAttribute("votacionesView", verVotacionesView);
+			view = action;
+			break;
 		default:
 			view = "home";
 		}

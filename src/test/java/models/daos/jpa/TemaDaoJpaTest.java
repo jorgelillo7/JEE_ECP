@@ -98,7 +98,7 @@ public class TemaDaoJpaTest {
 	@Test
 	public void testCountVotosByTema() {
 		long count = (temaDaoJpa.countVotosByTema(tema));
-		assertEquals(count, 1);
+		assertEquals(count, 2);
 	}
 	
 }
