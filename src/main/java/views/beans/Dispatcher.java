@@ -29,7 +29,6 @@ public class Dispatcher extends HttpServlet {
 		switch (action) {
 		case "nuevoTema":
 			NuevoTemaView nuevoTemaView = new NuevoTemaView();
-			nuevoTemaView.setTema(new Tema());
 			request.setAttribute(action, nuevoTemaView);
 			view = action;
 			break;
@@ -74,13 +73,11 @@ public class Dispatcher extends HttpServlet {
 		boolean passwordOk = false;
 		request.setCharacterEncoding("UTF-8");
 		switch (action) {
-		case "nuevoTema":
-			Tema tema = new Tema();
-			tema.setPregunta(request.getParameter("pregunta"));
-			tema.setCategoria(request.getParameter("categoria"));
-			NuevoTemaView nuevoTemaView = new NuevoTemaView();
+		case "nuevoTema": 
+			String pregunta = (request.getParameter("pregunta"));
+			String categoria = (request.getParameter("categoria"));
+			NuevoTemaView nuevoTemaView = new NuevoTemaView(categoria,pregunta);
 			nuevoTemaView.setControllerFactory(new ControllerEjbFactory());
-			nuevoTemaView.setTema(tema);
 			request.setAttribute(action, nuevoTemaView);
 			view = nuevoTemaView.process();
 			break;

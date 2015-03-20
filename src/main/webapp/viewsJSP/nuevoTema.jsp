@@ -13,12 +13,10 @@
 	
 	<form action="/JEE_ECP/jsp/nuevoTema" method="post">
 		<p>
-			Categoría: <input name="categoria" type="text"
-				value="${nuevoTemaView.tema.categoria}" required />
+			Categoría: <input name="categoria" type="text" required />
 		</p>
 		<p>
-			Pregunta: <input name="pregunta" type="text"
-				value="${nuevoTemaView.tema.pregunta}" required />
+			Pregunta: <input name="pregunta" type="text" required />
 		</p>
 		<p>
 			<input type="submit" value="Enviar" />

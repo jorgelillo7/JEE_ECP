@@ -9,9 +9,9 @@
 <h:body>
 	<h3>Nuevo Tema JSF</h3> 
 	<h:form id="nuevoTema">
-		<p>Categoría:<h:inputText id="categoria"/></p>
+		<p>Categoría:<h:inputText value="#{nuevoTemaView.categoria}"/></p>
 		 
-		<p>Pregunta:<h:inputText id="pregunta"/></p>
+		<p>Pregunta:<h:inputText value="#{nuevoTemaView.pregunta}"/></p>
 	
 		<h:commandButton value="Guardar" type="submit" action="#{nuevoTemaView.process}" />
 	</h:form>

@@ -14,31 +14,45 @@ import controllers.ejbs.NuevoTemaControllerEjb;
 public class NuevoTemaView {
 	@ManagedProperty(value = "#{controllerFactory}")
 	private ControllerFactory controllerFactory;
-	
+
 	private String errorMsg;
 
-	private Tema tema;
+	private String categoria;
 
-	public NuevoTemaView() {
-		tema = new Tema();
+	private String pregunta;
+
+	public NuevoTemaView(){
+		
+	}
+	public NuevoTemaView(String categoria, String pregunta) {
+		this.categoria = categoria;
+		this.pregunta = pregunta;
 	}
 
 	public String getErrorMsg() {
 		return errorMsg;
 	}
 
-	public Tema getTema() {
-		return tema;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setTema(Tema tema) {
-		this.tema = tema;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public String getPregunta() {
+		return pregunta;
+	}
+
+	public void setPregunta(String pregunta) {
+		this.pregunta = pregunta;
 	}
 
 	public void setControllerFactory(ControllerFactory controllerFactory) {
 		this.controllerFactory = controllerFactory;
 	}
-	
+
 	public void update() {
 		/*
 		 * LogManager.getLogger(TemaView.class).debug(
@@ -48,6 +62,7 @@ public class NuevoTemaView {
 	}
 
 	public String process() {
+		Tema tema = new Tema(this.categoria, this.pregunta);
 		LogManager.getLogger(NuevoTemaView.class).debug(
 				"Se accede a la capa de negocio para registrar tema: " + tema);
 
