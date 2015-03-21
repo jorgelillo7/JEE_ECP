@@ -76,7 +76,6 @@ public class EliminarTemaView {
 	public String eliminarTema() {
 		boolean check = this.controllerFactory.getEliminarTemaController()
 				.deleteTema(this.id);
-		System.out.print("AAAA" + check);
 		if (check) {
 			this.setSuccessMsg("Tema " + this.id + " eliminado con éxito");
 		} else {

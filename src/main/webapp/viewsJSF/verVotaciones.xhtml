@@ -2,24 +2,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<title>Ver Votaciones</title>
 </h:head>
 <h:body>
-	<h3>Ver Votaciones JSF</h3> 
-	
-	 <h:dataTable binding="#{table}" value="#{verVotacionesView.temas}" var="item">
-	    <h:column>
-	    <f:facet name="header">Pregunta</f:facet>
+	<h3>Ver Votaciones JSF</h3>
+
+	<h:dataTable binding="#{table}" value="#{verVotacionesView.temas}"
+		var="item">
+		<h:column>
+			<f:facet name="header">Pregunta</f:facet>
 	    	#{item}
 	    </h:column>
-	    <h:column>
-	    	 <f:facet name="header">Número de votos</f:facet>
+		<h:column>
+			<f:facet name="header">Número de votos</f:facet>
 	    	#{verVotacionesView.votosPorTema.get(table.rowIndex)}
 	    </h:column>
+
+		<c:forEach items="#{verVotacionesView.listaNiveles}" var="cabecera"
+			varStatus="loop">
+			<h:column>
+				<f:facet name="header">#{cabecera}</f:facet>
+			 #{verVotacionesView.medias.get(table.rowIndex).get(loop.index)} 
+		</h:column>
+		</c:forEach>
+
 	</h:dataTable>
-	
+
 	<p>
 		<h:link value="Volver a Home" outcome="home" />
 	</p>
