@@ -33,6 +33,7 @@ public class Dispatcher extends HttpServlet {
 			view = action;
 			break;
 		case "eliminarTema":
+			System.out.print("GET ELIM");
 			EliminarTemaView eliminarTemaView = new EliminarTemaView();
 			eliminarTemaView.setControllerFactory(new ControllerEjbFactory());
 			eliminarTemaView.mostrarListaTemas();
@@ -69,7 +70,9 @@ public class Dispatcher extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo().substring(1);
 		String view = "home";
-		boolean passwordOk = false;
+		
+		boolean checkPassword = false;
+
 		request.setCharacterEncoding("UTF-8");
 		switch (action) {
 		case "nuevoTema":
@@ -80,14 +83,14 @@ public class Dispatcher extends HttpServlet {
 			request.setAttribute(action, nuevoTemaView);
 			view = nuevoTemaView.process();
 			break;
-		case "eliminarTema":
+		case "eliminarTema": 
 			String password = String.valueOf(request.getParameter("password"));
-			EliminarTemaView eliminarTemaView = new EliminarTemaView();
-			eliminarTemaView.setPassword(password);
-			eliminarTemaView.setControllerFactory(new ControllerEjbFactory());
-			passwordOk = eliminarTemaView.checkPassword();
-			request.setAttribute("eliminarTemaView", eliminarTemaView);
-			view = "home";
+			HomeView homeView = new HomeView();
+			homeView.setPassword(password);
+			homeView.setControllerFactory(new ControllerEjbFactory());
+			request.setAttribute("homeView", homeView);
+			checkPassword = homeView.checkPassword();
+			view = homeView.process();
 			break;
 
 		case "eliminarTemaAutenticado":
@@ -112,9 +115,9 @@ public class Dispatcher extends HttpServlet {
 			int valoracion = Integer
 					.valueOf(request.getParameter("valoracion"));
 			añadirVotoView.setValoracion(valoracion);
-			
+
 			añadirVotoView.setIp(request.getRemoteAddr());
-  
+
 			view = añadirVotoView.saveVoto();
 
 			break;
@@ -122,13 +125,14 @@ public class Dispatcher extends HttpServlet {
 			view = "home";
 		}
 
-		if (passwordOk) {
-			response.sendRedirect("eliminarTema");
+		if(checkPassword){
+			response.sendRedirect(view);
 		} else {
 			this.getServletContext()
-					.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
-					.forward(request, response);
+			.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
+			.forward(request, response);
 		}
+		
 
 	}
 

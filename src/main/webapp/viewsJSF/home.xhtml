@@ -9,8 +9,23 @@
 <h:body>
 	<h3>Home JEE_ECP JSF</h3>
 	<h:link value="Nuevo Tema" outcome="nuevoTema" />
-	<p><h:link value="Ver Votaciones" outcome="verVotaciones" /></p>
+	
+	
+	<p>Eliminar Tema:</p>
+	<span style="color: red">${homeView.errorMsg}</span>
+		<h:form id="eliminarTema">
+		<p>Password:<h:inputText value="#{homeView.password}"/></p>
+		 
+		 
+		<h:commandButton value="Guardar" type="submit" action="#{homeView.process}" />
+	</h:form>
 	
 	<p><h:link value="Añadir Voto" outcome="nuevoVoto" /></p>
+	<p><h:link value="Ver Votaciones" outcome="verVotaciones" /></p>
+	
+	
+	 
+	
+	
 </h:body>
 </html>

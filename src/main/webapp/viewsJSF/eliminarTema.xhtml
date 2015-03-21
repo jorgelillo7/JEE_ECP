@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>Eliminar Tema</title>
+</h:head>
+<h:body>
+	<h3>Eliminar Tema JSF</h3>
+	<h:form id="quitarVoto">
+		<p>
+			Listado de Temas:
+			<h:selectOneMenu value="#{eliminarTemaView.id}">
+				<c:forEach var="tema" items="#{eliminarTemaView.temas}">
+					<f:selectItem itemValue="#{tema.getId()}" itemLabel="#{tema}" />
+				</c:forEach>
+			</h:selectOneMenu>
+		</p>
+		
+
+		<h:commandButton value="Borrar" type="submit"
+			action="#{eliminarTemaView.eliminarTema}" />
+	</h:form>
+	<p>
+		<h:link value="Volver a Home" outcome="home" />
+	</p>
+</h:body>
+</html>

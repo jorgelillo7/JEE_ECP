@@ -13,12 +13,12 @@
 		<a href="/JEE_ECP/jsp/nuevoTema">Nuevo Tema</a>
 	</p>
 
-	<c:set var="eView" scope="request" value="${eliminarTemaView}" />
-	<span style="color: green">${eView.successMsg}</span>
+	<c:set var="hView" scope="request" value="${homeView}" />
+	<span style="color: green">${hView.successMsg}</span>
 	<p>Eliminar Tema:</p>
 	<form action="/JEE_ECP/jsp/eliminarTema" method="post">
 		
-		<span style="color: red">${eView.errorMsg}</span>
+		<span style="color: red">${hView.errorMsg}</span>
 		<p>
 			Password: <input name="password" type="text" value="" />
 		</p>
