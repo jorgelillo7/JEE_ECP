@@ -46,7 +46,7 @@ public class VerVotacionesControllerEjb implements VerVotacionesController {
 		List<Long> numVotos = this.getNumeroVotos();
 		List<NivelEstudios> listaEstudios = this.getListaNivelEstudios();
 
-		List<List<String>> listaNivelesPorTema = new ArrayList<List<String>>();
+		List<List<String>> listaNivelesPorTema =  new ArrayList<List<String>>();
 		List<String> mediaListNivel;
 		
 		
