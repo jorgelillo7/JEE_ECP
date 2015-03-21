@@ -9,9 +9,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
  
 
+
 import models.daos.TemaDao;
 import models.entities.Tema;
 import models.entities.Voto;
+import models.utils.NivelEstudios;
 
 public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 		TemaDao {
@@ -91,6 +93,12 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	public long countVotosByTema(Tema tema) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Voto> findVotosByTemaAndNivel(Tema tema, NivelEstudios nivel) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
