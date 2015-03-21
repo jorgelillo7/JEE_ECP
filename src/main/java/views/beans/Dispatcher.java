@@ -43,8 +43,7 @@ public class Dispatcher extends HttpServlet {
 			AñadirVotoView añadirVotoView = new AñadirVotoView();
 			añadirVotoView.setVoto(new Voto());
 			añadirVotoView.setControllerFactory(new ControllerEjbFactory());
-			añadirVotoView.mostrarListaTemas();
-			añadirVotoView.mostrarListaEstudios();
+			añadirVotoView.updateView();
 			request.setAttribute("añadirVotoView", añadirVotoView);
 			view = action;
 			break;
@@ -73,10 +72,10 @@ public class Dispatcher extends HttpServlet {
 		boolean passwordOk = false;
 		request.setCharacterEncoding("UTF-8");
 		switch (action) {
-		case "nuevoTema": 
+		case "nuevoTema":
 			String pregunta = (request.getParameter("pregunta"));
 			String categoria = (request.getParameter("categoria"));
-			NuevoTemaView nuevoTemaView = new NuevoTemaView(categoria,pregunta);
+			NuevoTemaView nuevoTemaView = new NuevoTemaView(categoria, pregunta);
 			nuevoTemaView.setControllerFactory(new ControllerEjbFactory());
 			request.setAttribute(action, nuevoTemaView);
 			view = nuevoTemaView.process();
@@ -107,20 +106,14 @@ public class Dispatcher extends HttpServlet {
 			añadirVotoView.setControllerFactory(new ControllerEjbFactory());
 			añadirVotoView.setIdTema(temaSeleccionado);
 
-			Voto voto = new Voto();
-
 			String nivel = request.getParameter("nivelEstudios");
-			voto.setNivelEstudios(NivelEstudios.valueOf(nivel));
+			añadirVotoView.setNivelEstudios(NivelEstudios.valueOf(nivel));
 
 			int valoracion = Integer
 					.valueOf(request.getParameter("valoracion"));
-			voto.setValoracion(valoracion);
- 
-			String ipAddress = request.getRemoteAddr();
-
-			voto.setIp(ipAddress);
-
-			view = añadirVotoView.saveVoto(voto);
+			añadirVotoView.setValoracion(valoracion);
+  
+			view = añadirVotoView.saveVoto();
 
 			break;
 		default:

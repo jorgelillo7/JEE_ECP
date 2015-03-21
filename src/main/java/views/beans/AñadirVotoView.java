@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -15,19 +18,26 @@ import controllers.ControllerFactory;
 
 @ManagedBean
 public class AñadirVotoView {
+	@ManagedProperty(value = "#{controllerFactory}")
 	private ControllerFactory controllerFactory;
 
 	private String errorMsg;
 	private String successMsg;
 
-	public Integer idTema;
-
 	public Tema tema;
-	
+
 	private Voto voto;
-	
+
+	private String ip;
+
+	private NivelEstudios nivelEstudios;
+
+	private Integer valoracion;
+
+	private Integer idTema;
+
 	public List<NivelEstudios> listaEstudios;
-	
+
 	public List<NivelEstudios> getListaEstudios() {
 		return listaEstudios;
 	}
@@ -35,8 +45,7 @@ public class AñadirVotoView {
 	public void setListaEstudios(List<NivelEstudios> listaEstudios) {
 		this.listaEstudios = listaEstudios;
 	}
-	
-	
+
 	public List<Tema> temas;
 
 	public List<Tema> getTemas() {
@@ -46,7 +55,7 @@ public class AñadirVotoView {
 	public void setTemas(List<Tema> temas) {
 		this.temas = temas;
 	}
-	
+
 	public Voto getVoto() {
 		return voto;
 	}
@@ -55,7 +64,6 @@ public class AñadirVotoView {
 		this.voto = voto;
 	}
 
-	
 	public String getErrorMsg() {
 		return errorMsg;
 	}
@@ -72,6 +80,9 @@ public class AñadirVotoView {
 		this.successMsg = successMsg;
 	}
 
+	public void setControllerFactory(ControllerFactory controllerFactory) {
+		this.controllerFactory = controllerFactory;
+	}
 
 	public Integer getIdTema() {
 		return idTema;
@@ -81,30 +92,50 @@ public class AñadirVotoView {
 		this.idTema = idTema;
 	}
 
-	public void setControllerFactory(ControllerFactory controllerFactory) {
-		this.controllerFactory = controllerFactory;
+	public String getIp() {
+		return ip;
 	}
 
-	
-	public void mostrarListaTemas() {
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public NivelEstudios getNivelEstudios() {
+		return nivelEstudios;
+	}
+
+	public void setNivelEstudios(NivelEstudios nivelEstudios) {
+		this.nivelEstudios = nivelEstudios;
+	}
+
+	public Integer getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(Integer valoracion) {
+		this.valoracion = valoracion;
+	}
+
+	@PostConstruct
+	public void updateView() {
 		temas = this.controllerFactory.getAñadirVotoController()
 				.getListaTemas();
-	}
-
-	public void mostrarListaEstudios() {
 		listaEstudios = this.controllerFactory.getAñadirVotoController()
 				.getListaEstudios();
 	}
 
-	public String saveVoto(Voto voto) {
+	public String saveVoto() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		this.ip =  request.getRemoteAddr();
+		voto = new Voto(this.nivelEstudios, this.ip, this.valoracion);
+		
 		LogManager.getLogger(NuevoTemaView.class).debug(
 				"Se accede a la capa de negocio para registrar voto: " + voto);
 
-		
-		controllerFactory.getAñadirVotoController().saveVoto(voto, this.getIdTema());
+		controllerFactory.getAñadirVotoController().saveVoto(voto,
+				this.getIdTema());
 		return "home";
 
 	}
-	
 
 }

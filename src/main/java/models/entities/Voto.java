@@ -49,6 +49,13 @@ public class Voto {
 		this.valoracion = valoracion;
 		this.tema = tema;
 	}
+	
+	public Voto(NivelEstudios nivelEstudios, String ip, int valoracion) {
+		super();
+		this.nivelEstudios = nivelEstudios;
+		this.ip = ip;
+		this.valoracion = valoracion;
+	}
 
 	public Voto() {
 	}
