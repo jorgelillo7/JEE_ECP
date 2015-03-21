@@ -34,7 +34,7 @@ public class Voto {
 	public static final String VALORACION = "VALORACION";
 	private int valoracion;
 	
-	public static final String TEMA = "tema_id";
+	public static final String TEMA = "TEMA_ID";
 
 	@ManyToOne
 	@JoinColumn(name = TEMA, nullable = false)

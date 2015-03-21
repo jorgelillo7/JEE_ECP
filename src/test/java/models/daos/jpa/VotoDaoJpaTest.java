@@ -39,6 +39,7 @@ public class VotoDaoJpaTest {
 	@After
 	public void after() {
 		votoDaoJpa.deleteById(voto.getId());
+		temaDaoJpa.deleteById(tema.getId()); 
 	}
 
 	@Test
