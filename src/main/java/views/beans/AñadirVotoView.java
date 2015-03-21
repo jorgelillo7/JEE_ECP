@@ -125,8 +125,11 @@ public class AñadirVotoView {
 	}
 
 	public String saveVoto() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		this.ip =  request.getRemoteAddr();
+		if(this.ip == ""){
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			this.ip =  request.getRemoteAddr();
+		}
+	
 		voto = new Voto(this.nivelEstudios, this.ip, this.valoracion);
 		
 		LogManager.getLogger(NuevoTemaView.class).debug(

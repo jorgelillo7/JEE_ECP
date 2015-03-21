@@ -112,6 +112,8 @@ public class Dispatcher extends HttpServlet {
 			int valoracion = Integer
 					.valueOf(request.getParameter("valoracion"));
 			añadirVotoView.setValoracion(valoracion);
+			
+			añadirVotoView.setIp(request.getRemoteAddr());
   
 			view = añadirVotoView.saveVoto();
 
