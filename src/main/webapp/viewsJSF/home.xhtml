@@ -7,27 +7,27 @@
 	<title>Home JEE_ECP</title>
 </h:head>
 <h:body>
-	<h3>Home JEE_ECP JSF</h3>
-	<p>Bean: (#{homeView.locale})</p>
-	<p>#{msgs.keyJava}... #{homeView.msg("key1")}</p>  
-	<h:link value="Nuevo Tema" outcome="nuevoTema" />
+	<h3>#{msgs.homeTitle}</h3>
+	 
+	<h:link value="#{msgs.newThemeLink}" outcome="nuevoTema" />
 	
 	
-	<p>Eliminar Tema:</p>
+	<p>#{msgs.deleteThemeLink}:</p>
 	<span style="color: red">${homeView.errorMsg}</span>
 		<h:form id="eliminarTema">
-		<p>Password:<h:inputText value="#{homeView.password}"/></p>
+		<p>#{msgs.deleteThemePassword}:<h:inputText value="#{homeView.password}"/></p>
 		 
 		 
-		<h:commandButton value="Guardar" type="submit" action="#{homeView.process}" />
+		<h:commandButton value="#{msgs.deleteThemeButtonTitle}" type="submit" action="#{homeView.process}" />
 	</h:form>
 	
 	
-	<p><h:link value="Añadir Voto" outcome="nuevoVoto" /></p>
-	<p><h:link value="Ver Votaciones" outcome="verVotaciones" /></p>
+	<p><h:link value="#{msgs.addVoteLink}" outcome="nuevoVoto" /></p>
+	<p><h:link value="#{msgs.viewAllVotes}" outcome="verVotaciones" /></p>
 	
 	
 	 <h:form style="float:right">
+	 	<p>Bean: (#{homeView.locale})</p>
  			<h:commandLink action="#{homeView.change('es')}" value="Español" /> | 
             <h:commandLink action="#{homeView.change('en')}" value="English" />
 		</h:form>
