@@ -1,12 +1,20 @@
 package models.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
-public class Tema {
+public class Tema implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String TABLE = "tema";
 	public static final String ID = "ID";
 

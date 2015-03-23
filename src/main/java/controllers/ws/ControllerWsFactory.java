@@ -18,8 +18,10 @@ public class ControllerWsFactory extends ControllerFactory {
 
 	@Override
 	public NuevoTemaController getNuevoTemaControler() {
-		// TODO Auto-generated method stub
-		return null;
+		if (nuevoTemaController == null) {
+			nuevoTemaController = new NuevoTemaControllerWS();
+        }
+        return nuevoTemaController;
 	}
 
 	@Override
