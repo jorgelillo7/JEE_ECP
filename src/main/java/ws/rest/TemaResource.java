@@ -89,5 +89,12 @@ public class TemaResource {
 
 		return Response.ok("Tema borrado con éxito").build();
 	}
+	
+	 @GET
+	    @Path(TemaUris.PATH_AUTENTICAR)
+	    public String autenticar(@QueryParam("code") String code) {
+		 	LogManager.getLogger(clazz).debug("GET: " + TemaUris.PATH_TEMAS + "/" + TemaUris.PATH_AUTENTICAR + ": " + code);
+	        return Boolean.toString(code.equals(PASSWORD_CORRECTO));
+	    }
 
 }
