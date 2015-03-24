@@ -26,20 +26,26 @@ public class ControllerWsFactory extends ControllerFactory {
 
 	@Override
 	public EliminarTemaController getEliminarTemaController() {
-		// TODO Auto-generated method stub
-		return null;
+		if (eliminarTemaController == null) {
+			eliminarTemaController = new EliminarTemaControllerWS();
+        }
+        return eliminarTemaController;
 	}
 
 	@Override
 	public AñadirVotoController getAñadirVotoController() {
-		// TODO Auto-generated method stub
-		return null;
+		if (añadirVotoController == null) {
+			añadirVotoController = new AñadirVotoControllerWS();
+        }
+        return añadirVotoController;
 	}
 
 	@Override
 	public VerVotacionesController getVerVotacionesController() {
-		// TODO Auto-generated method stub
-		return null;
+		if (verVotacionesController == null) {
+			verVotacionesController = new VerVotacionesControllerWS();
+        }
+        return verVotacionesController;
 	}
 
 }

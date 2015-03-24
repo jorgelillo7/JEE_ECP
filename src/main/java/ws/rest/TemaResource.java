@@ -48,7 +48,7 @@ public class TemaResource {
 	//http://localhost:8080/JEE_ECP/rest/temas/
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public List<Tema> getAll() {
+	public List<Tema> consultarTodos() {
 		TemaDao temaDao = DaoFactory.getFactory().getTemaDao();
 		List<Tema> temas = temaDao.findAll();
 		LogManager.getLogger(clazz).debug(
