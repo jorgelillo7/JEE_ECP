@@ -26,6 +26,17 @@ public class TemaResource {
 		LogManager.getLogger(this.getClass()).debug(TemaUris.PATH_TEMAS + msg);
 	}
 
+    @POST
+    @Consumes({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_XML})
+    public Response añadirTema(Tema tema) {
+        LogManager.getLogger(clazz).debug("Llamada al metodo create " + tema);
+        TemaDao temaDao = DaoFactory.getFactory().getTemaDao();
+        temaDao.create(tema);
+        LogManager.getLogger(clazz).debug("Tema creado con id "+tema.getId());
+        return Response.ok(tema).build();
+    }
+    
 	@GET
 	@Path(TemaUris.PATH_ID_PARAM)
 	@Consumes({ MediaType.APPLICATION_XML })
