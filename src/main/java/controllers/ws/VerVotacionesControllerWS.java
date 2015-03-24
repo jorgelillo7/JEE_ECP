@@ -39,7 +39,7 @@ VerVotacionesController{
 
 	@Override
 	public List<List<String>> getListaMedia() {
-		// TODO
+		// TODO AQUí ME QUEDÉ
 		return null;
 	}
 
