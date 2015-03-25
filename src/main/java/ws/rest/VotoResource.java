@@ -38,6 +38,7 @@ public class VotoResource {
 	private void debug(String msg) {
 		LogManager.getLogger(this.getClass()).debug(TemaUris.PATH_TEMAS + msg);
 	}
+	//Ejemplo JerseyClient
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public Response añadir(Voto voto) {

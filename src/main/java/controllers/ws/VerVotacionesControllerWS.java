@@ -5,6 +5,8 @@ import java.util.List;
 import ws.TemaUris;
 import ws.VotoUris;
 import models.entities.Tema;
+import models.utils.ListLong;
+import models.utils.ListMedias;
 import models.utils.ListNivelEstudios;
 import models.utils.ListTemas;
 import models.utils.NivelEstudios;
@@ -24,8 +26,11 @@ VerVotacionesController{
 
 	@Override
 	public List<Long> getNumeroVotos() {
-		// TODO Auto-generated method stub
-		return null;
+		WsManager wsManager = ControllerWs.buildWebServiceManager(TemaUris.PATH_LIST_NUM_VOTOS);
+        if (wsManager.read()) { 
+            return wsManager.entity(ListLong.class).getListLong();
+        }
+        return null;
 	}
 
 	@Override
@@ -39,7 +44,10 @@ VerVotacionesController{
 
 	@Override
 	public List<List<String>> getListaMedia() {
-		// TODO AQUí ME QUEDÉ
+		WsManager wsManager = ControllerWs.buildWebServiceManager(TemaUris.PATH_MEDIA_VOTOS);
+        if (wsManager.read()) { 
+            return wsManager.entity(ListMedias.class).getListMedia();
+        }
 		return null;
 	}
 

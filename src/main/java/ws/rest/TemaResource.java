@@ -1,5 +1,7 @@
 package ws.rest;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,16 +14,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import models.daos.DaoFactory;
 import models.daos.TemaDao;
 import models.entities.Tema;
+import models.entities.Voto;
+import models.utils.ListLong;
+import models.utils.ListMedias;
+import models.utils.ListNivelEstudios;
+import models.utils.NivelEstudios;
 
 import org.apache.logging.log4j.LogManager;
 
 import ws.TemaUris;
+import ws.VotoUris;
 
 @Stateless
 @Path(TemaUris.PATH_TEMAS)
@@ -45,7 +54,7 @@ public class TemaResource {
 		return Response.ok(tema).build();
 	}
 
-	//http://localhost:8080/JEE_ECP/rest/temas/
+	// http://localhost:8080/JEE_ECP/rest/temas/
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public List<Tema> consultarTodos() {
@@ -56,7 +65,7 @@ public class TemaResource {
 		return temas;
 	}
 
-	//Ejemplo en JerseyClient.java
+	// Ejemplo en JerseyClient.java
 	@POST
 	@Consumes({ MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_XML })
@@ -90,11 +99,96 @@ public class TemaResource {
 		return Response.ok("Tema borrado con éxito").build();
 	}
 	
-	 @GET
-	    @Path(TemaUris.PATH_AUTENTICAR)
-	    public String autenticar(@QueryParam("code") String code) {
-		 	LogManager.getLogger(clazz).debug("GET: " + TemaUris.PATH_TEMAS + "/" + TemaUris.PATH_AUTENTICAR + ": " + code);
-	        return Boolean.toString(code.equals(PASSWORD_CORRECTO));
-	    }
+	//http://localhost:8080/JEE_ECP/rest/temas/autenticar/?code=666
+	@GET
+	@Path(TemaUris.PATH_AUTENTICAR)
+	public String autenticar(@QueryParam("code") String code) {
+		LogManager.getLogger(clazz).debug(
+				"GET: " + TemaUris.PATH_TEMAS + "/" + TemaUris.PATH_AUTENTICAR
+						+ ": " + code);
+		return Boolean.toString(code.equals(PASSWORD_CORRECTO));
+	}
+
+	//http://localhost:8080/JEE_ECP/rest/temas/listNumVotos
+	@GET
+	@Path(TemaUris.PATH_LIST_NUM_VOTOS)
+	@Produces(MediaType.APPLICATION_XML)
+	public Response listNumeroVotos() {
+		List<Long> listaVotos = new ArrayList<Long>();
+		List<Tema> temas = DaoFactory.getFactory().getTemaDao().findAll();
+
+		long count = 0;
+		for (Tema tema : temas) {
+			count = DaoFactory.getFactory().getTemaDao().countVotosByTema(tema);
+			listaVotos.add(count);
+		}
+		LogManager.getLogger(clazz).debug(
+				"GET: " + TemaUris.PATH_LIST_NUM_VOTOS + ": ");
+
+		ListLong listLong = new ListLong();
+		listLong.setListLong(listaVotos);
+		Response response = Response.ok(listLong).build();
+		return response;
+	}
+	
+	
+	//http://localhost:8080/JEE_ECP/rest/temas/mediaVotos
+		@GET
+		@Path(TemaUris.PATH_MEDIA_VOTOS)
+		@Produces(MediaType.APPLICATION_JSON)
+		public ListMedias listaMedias() {
+			List<Tema> temas = DaoFactory.getFactory().getTemaDao().findAll();
+			 NivelEstudios[] nivelEstudios = NivelEstudios.values();
+		        List<NivelEstudios> nivelEstudiosList = new ArrayList<NivelEstudios>();
+		        for (NivelEstudios nivelEstudiosIt : nivelEstudios) {
+		            nivelEstudiosList.add(nivelEstudiosIt);
+		        }
+			List<NivelEstudios> listaEstudios = nivelEstudiosList;
+
+			List<List<String>> listaNivelesPorTema = new ArrayList<List<String>>();
+			List<String> mediaListNivel;
+
+			for (int i = 0; i < temas.size(); i++) {
+				Tema tema = temas.get(i);
+				int votosPorPregunta = 0;
+				mediaListNivel = new ArrayList<String>();
+
+				for (int j = 0; j < listaEstudios.size(); j++) {
+					NivelEstudios nivel = listaEstudios.get(j);
+ 
+					List<Voto> votosPorPreguntaYNivel = DaoFactory.getFactory()
+							.getTemaDao().findVotosByTemaAndNivel(tema, nivel);
+
+					votosPorPregunta = votosPorPreguntaYNivel.size();
+					int sumaValoraciones = 0;
+
+					for (Voto voto : votosPorPreguntaYNivel) {
+						sumaValoraciones += voto.getValoracion();
+					}
+					String mediaString = "";
+					if (votosPorPregunta > 0) {
+						double media = (double) sumaValoraciones / (double) votosPorPregunta;
+						DecimalFormat df = new DecimalFormat("0.00");
+						mediaString = String.valueOf(df.format(media))
+								+ " (Total: " + votosPorPregunta + ")";
+
+					} else {
+						mediaString = "0";
+					}
+
+					mediaListNivel.add(mediaString);
+				}
+				listaNivelesPorTema.add(mediaListNivel);
+
+			}
+			
+			LogManager.getLogger(clazz).debug(
+					"GET: " + TemaUris.PATH_MEDIA_VOTOS + ": ");
+
+			ListMedias listMedia = new ListMedias();
+			listMedia.setListMedia(listaNivelesPorTema); 
+			 
+			return listMedia;
+		}
 
 }
