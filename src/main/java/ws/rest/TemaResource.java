@@ -37,11 +37,7 @@ import ws.VotoUris;
 public class TemaResource {
 	private final static Class<TemaResource> clazz = TemaResource.class;
 	private static final String PASSWORD_CORRECTO = "666";
-
-	private void debug(String msg) {
-		LogManager.getLogger(this.getClass()).debug(TemaUris.PATH_TEMAS + msg);
-	}
-
+ 
 	// http://localhost:8080/JEE_ECP/rest/temas/9
 	@GET
 	@Path(TemaUris.PATH_ID_PARAM)

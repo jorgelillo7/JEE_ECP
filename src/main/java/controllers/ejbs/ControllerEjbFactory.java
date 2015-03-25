@@ -3,6 +3,8 @@ package controllers.ejbs;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import models.daos.DaoFactory;
+import models.daos.jpa.DaoJpaFactory;
 import controllers.AñadirVotoController;
 import controllers.ControllerFactory;
 import controllers.EliminarTemaController;
