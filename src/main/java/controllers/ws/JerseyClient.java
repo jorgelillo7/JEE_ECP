@@ -36,9 +36,9 @@ public class JerseyClient {
 				Entity.entity(tema, MediaType.APPLICATION_XML), Tema.class);
 	}
 	
-	private static void addVoto(){
+	private static  void addVoto(){
 		TemaDao temaDao = DaoFactory.getFactory().getTemaDao();
-		Tema tema = temaDao.read(9);
+		Tema tema = temaDao.read(1);
 		Voto voto = new Voto(NivelEstudios.FP, "172.289.1.5", 5, tema);
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(
