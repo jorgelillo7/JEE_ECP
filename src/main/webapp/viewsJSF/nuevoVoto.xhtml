@@ -13,7 +13,7 @@
 		<p>
 
 			Listado de Temas:
-			<h:selectOneMenu value="#{añadirVotoView.idTema}">
+			<h:selectOneMenu value="#{añadirVotoView.idTema}" required="true">
 				<c:forEach var="tema" items="#{añadirVotoView.temas}">
 					<f:selectItem itemValue="#{tema.getId()}" itemLabel="#{tema}" />
 				</c:forEach>

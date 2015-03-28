@@ -18,8 +18,8 @@ public class JerseyClient {
 	public static void main(String[] args) {
 
 		try {
-			  //addVoto();
 			  //addTema();
+			  //addVoto();
 			  //modifyVoto();
 		} catch (Exception e) {
 
@@ -53,7 +53,7 @@ public class JerseyClient {
 	private static void modifyVoto() {
 		VotoDao votoDao = DaoFactory.getFactory().getVotoDao();
 		Voto voto = votoDao.read(1);
-		voto.setIp("127.0.0.1");
+		voto.setIp("197.0.0.1");
 		voto.setNivelEstudios(NivelEstudios.Secundaria);
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:8080/JEE_ECP/rest/")

@@ -13,7 +13,7 @@
 
 	<form action="/JEE_ECP/jsp/añadirVoto" method="post">
 		<p>
-			Listado de Temas: <select name="temaAVotar">
+			Listado de Temas: <select name="temaAVotar" required="true">
 				<c:forEach var="tema" items="${aVotoView.temas}">
 					<option value="${tema.getId()}">${tema.toString()}</option>
 				</c:forEach>
