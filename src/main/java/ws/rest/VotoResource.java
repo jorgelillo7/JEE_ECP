@@ -37,7 +37,7 @@ public class VotoResource {
 	private final static Class<VotoResource> clazz = VotoResource.class;
 	private void debug(String msg) {
 		LogManager.getLogger(this.getClass()).debug(TemaUris.PATH_TEMAS + msg);
-	}
+	} 
 	//Ejemplo JerseyClient
     @POST
     @Consumes(MediaType.APPLICATION_XML)
