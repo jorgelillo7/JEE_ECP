@@ -19,7 +19,7 @@ public class JerseyClient {
 
 		try {
 			  //addTema();
-			  //addVoto();
+			  //addVoto(); 
 			  //modifyVoto();
 		} catch (Exception e) {
 
