@@ -1,7 +1,7 @@
 package models.daos;
 
 import models.daos.jpa.DaoJpaFactory;
-
+ 
 public abstract class DaoFactory { 
 	public static DaoFactory factory = null;
 
