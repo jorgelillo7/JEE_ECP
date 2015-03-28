@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14262720495080" configfile="/JEE_ECP/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14262720495080" configfile="/JEE_ECP/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="viewsJSF/eliminarTema.xhtml" id="pf14275672248053" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14275672248054" path="/viewsJSF/eliminarTema.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewsJSF/home.xhtml" id="pf14275672248055" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14275672248054 pf14275674196196 pf14275674196197" path="/viewsJSF/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewsJSF/nuevoVoto.xhtml" id="pf14275674196198" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14275674196196" path="/viewsJSF/nuevoVoto.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="viewsJSF/nuevoTema.xhtml" id="pf14275674196199" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14275674196197" path="/viewsJSF/nuevoTema.xhtml"/>
+  <links id="pf14275672248054" target="pf14275672248055" source="pf14275672248053" outcome="home" redirect="true" fromaction="#{eliminarTemaView.eliminarTema}"/>
+  <links id="pf14275674196196" target="pf14275672248055" source="pf14275674196198" outcome="home" redirect="true" fromaction="#{añadirVotoView.saveVoto}"/>
+  <links id="pf14275674196197" target="pf14275672248055" source="pf14275674196199" outcome="home" redirect="true" fromaction="#{nuevoTemaView.process}"/>
+</pageflow:Pageflow>

@@ -69,7 +69,8 @@ public class VerVotacionesControllerEjb implements VerVotacionesController {
 				}
 				String mediaString = "";
 				if (votosPorPregunta > 0) {
-					double media = (double) sumaValoraciones / (double) votosPorPregunta;
+					double media = (double) sumaValoraciones
+							/ (double) votosPorPregunta;
 					DecimalFormat df = new DecimalFormat("0.00");
 					mediaString = String.valueOf(df.format(media))
 							+ " (Total: " + votosPorPregunta + ")";

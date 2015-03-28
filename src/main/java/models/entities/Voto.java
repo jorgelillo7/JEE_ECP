@@ -136,7 +136,7 @@ public class Voto implements Serializable {
 	public String toString() {
 		return "Voto [id=" + id + ", nivelEstudios=" + nivelEstudios
 				+ ", valoracion=" + valoracion + ", ip=" + ip + " tema= "
-				+ tema.getCategoria() + "]";
+				+ tema + "]";
 	}
 
 }

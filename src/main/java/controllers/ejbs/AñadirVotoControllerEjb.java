@@ -17,28 +17,28 @@ public class AñadirVotoControllerEjb implements AñadirVotoController {
 		TemaDao temaDao = DaoFactory.getFactory().getTemaDao();
 		Tema tema = temaDao.read(idTema);
 		voto.setTema(tema);
-		 boolean result = false;
-	        if (voto != null) {
-	            DaoFactory.getFactory().getVotoDao().create(voto);
-	            result = true;
-	        }
-	        return result;
+		boolean result = false;
+		if (voto != null) {
+			DaoFactory.getFactory().getVotoDao().create(voto);
+			result = true;
+		}
+		return result;
 	}
 
 	@Override
 	public List<Tema> getListaTemas() {
 		return DaoFactory.getFactory().getTemaDao().findAll();
 	}
-	
+
 	@Override
 	public List<NivelEstudios> getListaEstudios() {
 		List<NivelEstudios> lista = new ArrayList<NivelEstudios>();
-		
+
 		NivelEstudios[] arrayNivel = NivelEstudios.values();
 		for (NivelEstudios nivel : arrayNivel) {
 			lista.add(nivel);
 		}
-		
+
 		return lista;
 	}
 
