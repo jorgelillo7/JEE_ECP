@@ -69,7 +69,7 @@ public class TemaResource {
 		return Response.ok(tema).build();
 	}
 
-	// http://localhost:8080/JEE_ECP/rest/temas/25?id=25&code=666 (DELETE)
+	// http://localhost:8080/JEE_ECP/rest/temas/25?id=25&code=666 (DELETE probado con PostMan)
 	@DELETE
 	@Path(TemaUris.PATH_ID_PARAM)
 	public Response eliminar(@PathParam("id") Integer id,
