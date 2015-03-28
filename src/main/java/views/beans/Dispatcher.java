@@ -85,7 +85,7 @@ public class Dispatcher extends HttpServlet {
 			break;
 		case "eliminarTema": 
 			String password = String.valueOf(request.getParameter("password"));
-			HomeView homeView = new HomeView();
+			HomeView homeView = new HomeView("JSP");
 			homeView.setPassword(password);
 			homeView.setControllerFactory(new ControllerEjbFactory());
 			request.setAttribute("homeView", homeView);
