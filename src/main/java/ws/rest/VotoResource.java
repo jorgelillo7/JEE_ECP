@@ -28,25 +28,24 @@ import models.utils.NivelEstudios;
 
 import org.apache.logging.log4j.LogManager;
 
-import ws.TemaUris;
 import ws.VotoUris;
 
 @Path(VotoUris.PATH_VOTOS)
 public class VotoResource {
 
 	private final static Class<VotoResource> clazz = VotoResource.class;
+
 	private void debug(String msg) {
-		LogManager.getLogger(this.getClass()).debug(TemaUris.PATH_TEMAS + msg);
+		LogManager.getLogger(this.getClass()).debug(VotoUris.PATH_VOTOS + msg);
 	} 
-	//Ejemplo JerseyClient
+	// Ejemplo en JerseyClient.java
     @POST
     @Consumes(MediaType.APPLICATION_XML)
     public Response añadir(Voto voto) {
     	VotoDao votoDao = DaoFactory.getFactory().getVotoDao();
         Response result;
         votoDao.create(voto);
-        result = Response.created(URI.create(VotoUris.PATH_VOTOS + "/" + voto.getId()))
-                .entity(String.valueOf(voto.getId())).build();
+        result = Response.ok(voto).build();
         LogManager.getLogger(clazz).debug("POST: " + VotoUris.PATH_VOTOS + ": " + voto);
         return result;
     }
@@ -57,8 +56,7 @@ public class VotoResource {
     	VotoDao votoDao = DaoFactory.getFactory().getVotoDao();
         Response result;
         votoDao.update(voto);
-        result = Response.created(URI.create(VotoUris.PATH_VOTOS + "/" + voto.getId()))
-                .entity(String.valueOf(voto.getId())).build();
+        result = Response.ok(voto).build();
         LogManager.getLogger(clazz).debug("PUT: " + VotoUris.PATH_VOTOS + ": " + voto);
         return result;
     }
