@@ -8,30 +8,42 @@
 </h:head>
 <h:body>
 	<h3>#{msgs.homeTitle}</h3>
-	 
+	<p style="float: right">
+		<a href="../index.html">#{msgs.homeText}</a>
+	</p>
+
 	<h:link value="#{msgs.newThemeLink}" outcome="nuevoTema" />
-	
-	
+
+
 	<p>#{msgs.deleteThemeLink}:</p>
 	<span style="color: red">${homeView.errorMsg}</span>
-		<h:form id="eliminarTema">
-		<p>#{msgs.deleteThemePassword}:<h:inputText value="#{homeView.password}"/></p>
-		 
-		 
-		<h:commandButton value="#{msgs.deleteThemeButtonTitle}" type="submit" action="#{homeView.process}" />
+	<h:form id="eliminarTema">
+		<p>
+			#{msgs.deleteThemePassword}:
+			<h:inputText value="#{homeView.password}" />
+		</p>
+
+
+		<h:commandButton value="#{msgs.deleteThemeButtonTitle}" type="submit"
+			action="#{homeView.process}" />
 	</h:form>
-	
-	
-	<p><h:link value="#{msgs.addVoteLink}" outcome="nuevoVoto" /></p>
-	<p><h:link value="#{msgs.viewAllVotes}" outcome="verVotaciones" /></p>
-	
-	
-	 <h:form style="float:right">
-	 	<p>Bean: (#{homeView.locale})</p>
- 			<h:commandLink action="#{homeView.change('es')}" value="Español" /> | 
-            <h:commandLink action="#{homeView.change('en')}" value="English" />
-		</h:form>
-	
-	
+
+
+	<p>
+		<h:link value="#{msgs.addVoteLink}" outcome="nuevoVoto" />
+	</p>
+	<p>
+		<h:link value="#{msgs.viewAllVotes}" outcome="verVotaciones" />
+	</p>
+
+
+	<h:form style="float:right">
+		<p>Bean: (#{homeView.locale})</p>
+		<h:commandLink action="#{homeView.change('es')}" value="Español" /> | 
+            <h:commandLink action="#{homeView.change('en')}"
+			value="English" />
+	</h:form>
+
+
 </h:body>
 </html>

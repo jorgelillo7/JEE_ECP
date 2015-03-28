@@ -9,6 +9,9 @@
 </head>
 <body>
 	<h1>Home JEE_ECP JSP</h1>
+	<p style="float:right">
+		<a href="../index.html">Vuelta a Inicio</a>
+	</p>
 	<p>
 		<a href="/JEE_ECP/jsp/nuevoTema">Nuevo Tema</a>
 	</p>
@@ -17,7 +20,7 @@
 	<span style="color: green">${hView.successMsg}</span>
 	<p>Eliminar Tema:</p>
 	<form action="/JEE_ECP/jsp/eliminarTema" method="post">
-		
+
 		<span style="color: red">${hView.errorMsg}</span>
 		<p>
 			Password: <input name="password" type="text" value="" />
@@ -27,12 +30,12 @@
 		</p>
 
 	</form>
-	
+
 	<p>
-	<a href="/JEE_ECP/jsp/añadirVoto">Añadir Voto</a>
+		<a href="/JEE_ECP/jsp/añadirVoto">Añadir Voto</a>
 	</p>
-	
-		<p>
+
+	<p>
 		<a href="/JEE_ECP/jsp/verVotaciones">Ver votaciones</a>
 	</p>
 
