@@ -142,7 +142,7 @@ public class HomeView {
 				votoDaoJpa.deleteById(voto.getId());
 			}
 			temaDaoJpa.deleteById(tema.getId());
-		}
+		} 
 
 	}
 
