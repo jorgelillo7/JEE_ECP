@@ -20,7 +20,7 @@ import models.utils.NivelEstudios;
 
 @XmlRootElement
 @Entity
-public class Voto implements Serializable{
+public class Voto implements Serializable {
 	/**
 	 * 
 	 */
@@ -29,7 +29,8 @@ public class Voto implements Serializable{
 	public static final String ID = "ID";
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)  //auto increment
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// auto increment
 	private Integer id;
 
 	public static final String NIVEL_ESTUDIOS = "NIVELESTUDIOS";
@@ -40,13 +41,13 @@ public class Voto implements Serializable{
 	private String ip;
 
 	public static final String VALORACION = "VALORACION";
-	private int valoracion;
-	
+	private Integer valoracion;
+
 	public static final String TEMA = "TEMA_ID";
 
 	@ManyToOne
 	@JoinColumn(name = TEMA, nullable = false)
-    @CascadeOnDelete
+	@CascadeOnDelete
 	private Tema tema;
 
 	public Voto(NivelEstudios nivelEstudios, String ip, int valoracion,
@@ -57,7 +58,7 @@ public class Voto implements Serializable{
 		this.valoracion = valoracion;
 		this.tema = tema;
 	}
-	
+
 	public Voto(NivelEstudios nivelEstudios, String ip, int valoracion) {
 		super();
 		this.nivelEstudios = nivelEstudios;
@@ -109,9 +110,33 @@ public class Voto implements Serializable{
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((valoracion == null) ? 0 : valoracion.hashCode());
+		result = prime * result
+				+ ((nivelEstudios == null) ? 0 : nivelEstudios.hashCode());
+
+		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+
+		result = prime * result + ((tema == null) ? 0 : tema.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		assert obj != null;
+        Voto other = (Voto) obj;
+        return id.equals(other.id) && tema.equals(other.tema) && ip.equals(other.ip)
+                && valoracion == other.valoracion && nivelEstudios == other.nivelEstudios;
+	}
+
+	@Override
 	public String toString() {
 		return "Voto [id=" + id + ", nivelEstudios=" + nivelEstudios
-				+ ", valoracion=" + valoracion + ", ip=" + ip + "]";
+				+ ", valoracion=" + valoracion + ", ip=" + ip + " tema= "
+				+ tema.getCategoria() + "]";
 	}
 
 }

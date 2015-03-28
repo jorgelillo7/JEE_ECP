@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-public class Tema implements Serializable{
+public class Tema implements Serializable {
 	/**
 	 * 
 	 */
@@ -19,11 +19,12 @@ public class Tema implements Serializable{
 	public static final String ID = "ID";
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)  //auto increment
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// auto increment
 	private Integer id;
 
 	public static final String PREGUNTA = "PREGUNTA";
-	private String pregunta; 
+	private String pregunta;
 
 	public static final String CATEGORIA = "CATEGORIA";
 	private String categoria;
@@ -51,7 +52,7 @@ public class Tema implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getCategoria() {
 		return categoria;
 	}
@@ -69,9 +70,27 @@ public class Tema implements Serializable{
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		assert obj != null;
+		Tema other = (Tema) obj;
+		return id.equals(other.id) && categoria.equals(other.categoria)
+				&& pregunta.equals(other.pregunta);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result
+				+ ((pregunta == null) ? 0 : pregunta.hashCode());
+		return result;
+	}
+
+	@Override
 	public String toString() {
 		return categoria + " - " + pregunta;
 	}
-
 
 }

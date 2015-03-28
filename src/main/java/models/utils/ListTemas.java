@@ -9,19 +9,18 @@ import models.entities.Tema;
 @XmlRootElement
 public class ListTemas {
 
-    private List<Tema> listTemas;
+	private List<Tema> listTemas;
 
-    public ListTemas() {
+	public ListTemas() {
 
-    }
+	}
 
-    public List<Tema> getListTemas() {
-        return listTemas;
-    }
+	public List<Tema> getListTemas() {
+		return listTemas;
+	}
 
-    public void setListTemas(List<Tema> listTemas) {
-        this.listTemas = listTemas;
-    }
-
+	public void setListTemas(List<Tema> listTemas) {
+		this.listTemas = listTemas;
+	}
 
 }
